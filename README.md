@@ -96,11 +96,18 @@ Husky + lint-staged run automatically on `git commit`:
 
 ## Documentation
 
-- [BizPulse PRD](BizPulse_PRD.txt) — Full product requirements
-- [Execution Plan](BizPulse_Execution_Plan.md) — Phase breakdown
-- [UI Guide](BizPulse_UI_Guide.txt) — Screen-by-screen design spec
-- [Planning](./.planning/) — GSD roadmap, requirements, project context
-- [Contributing](CONTRIBUTING.md) — Dev workflow and conventions
+| Document | Purpose |
+|----------|---------|
+| [Architecture](docs/ARCHITECTURE.md) | System design, data flow, DB schema, scaling path |
+| [Coding Guidelines](docs/CODING-GUIDELINES.md) | Do's & don'ts, patterns, anti-patterns for PHP and TypeScript |
+| [Security](docs/SECURITY.md) | Auth, multi-tenant isolation, query safety, data protection |
+| [Performance](docs/PERFORMANCE.md) | Caching, pagination, sync optimization, mobile rendering |
+| [Deployment](docs/DEPLOYMENT.md) | VPS, Fly.io, EAS Build, CI/CD, migration safety |
+| [Contributing](CONTRIBUTING.md) | Dev workflow, branch strategy, PR process |
+| [PRD](BizPulse_PRD.txt) | Full product requirements document |
+| [Execution Plan](BizPulse_Execution_Plan.md) | Phase breakdown |
+| [UI Guide](BizPulse_UI_Guide.txt) | Screen-by-screen design spec |
+| [Planning](./.planning/) | GSD roadmap, requirements, project context |
 
 ## License
 
