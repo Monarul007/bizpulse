@@ -1,0 +1,1235 @@
+================================================================================
+BIZPULSE — PRODUCT REQUIREMENTS DOCUMENT (PRD)
+AI-Powered Business Intelligence Mobile App
+================================================================================
+
+Version       : 1.0 (MVP)
+Date          : April 12, 2026
+Author        : Confidential
+Status        : Draft — Pre-Development
+Target Client : eMartway Skincare Limited (Pilot), All Business Owners (SaaS)
+Platform      : Mobile (iOS + Android via React Native/Expo), Web Dashboard (Next.js)
+
+________________________________________________________________________________
+
+TABLE OF CONTENTS
+
+  1. Executive Summary
+  2. Problem Statement
+  3. Vision & Mission
+  4. Target Users
+  5. Product Scope
+  6. Core Features & Modules
+  7. Q&A Section — Business Owner Problems & Solutions
+  8. Technical Architecture Overview
+  9. Tech Stack
+ 10. Non-Functional Requirements
+ 11. Multi-Tenant SaaS Architecture
+ 12. Monetization & Pricing
+ 13. Build Timeline (MVP)
+ 14. Success Metrics
+ 15. Risks & Mitigations
+ 16. Future Roadmap
+
+________________________________________________________________________________
+
+
+1. EXECUTIVE SUMMARY
+________________________________________________________________________________
+
+BizPulse is a mobile-first AI business intelligence platform that plugs into any
+existing business system (MySQL/Laravel, or any database) and gives the business
+owner a real-time, conversational view of their entire operation — from sales and
+inventory to customers, employees, and finances.
+
+The core insight: Business owners today are rich in data and poor in answers.
+They have custom admin systems, sales reports, spreadsheets — but no single place
+where they can ask "How is my business doing right now?" and get an instant,
+intelligent response.
+
+BizPulse is not another admin panel. It is a Smart Business Pod — an AI co-pilot
+that sits on the owner's phone, monitors everything, alerts them proactively, and
+answers questions in plain language, day or night.
+
+Pilot client: eMartway Skincare Limited, Bangladesh's largest beauty e-commerce
+platform, with 300+ brands, 1,000+ SKUs, and operations across Bangladesh.
+
+Long-term goal: A white-label SaaS product deployable for any business type —
+e-commerce, restaurants, clinics, law firms — without changing the client's
+existing systems.
+
+
+________________________________________________________________________________
+
+
+2. PROBLEM STATEMENT
+________________________________________________________________________________
+
+A typical business owner in Bangladesh (and globally) faces the following daily
+operational challenges:
+
+  - They must log into multiple systems to get a full picture of the business.
+  - Sales reports are generated manually or periodically, not in real time.
+  - Dead stock, churn risk, and revenue drops are discovered too late.
+  - Valuable customers leave silently with no early warning system.
+  - Employee performance is tracked informally or not at all.
+  - Financial clarity (P&L, margins, cash flow) requires an accountant or
+    manual spreadsheet work.
+  - There is no way to "ask the business" a question and get an instant answer.
+
+The result: The business owner is always reactive, never proactive. They make
+decisions based on gut feeling rather than real-time intelligence.
+
+BizPulse solves this by converting raw business data into live, conversational,
+actionable intelligence — delivered to the owner's phone.
+
+
+________________________________________________________________________________
+
+
+3. VISION & MISSION
+________________________________________________________________________________
+
+Vision:
+  Every business owner in the world should have access to a brilliant, always-on
+  business intelligence partner in their pocket — regardless of how big or small
+  their company is.
+
+Mission:
+  Build the simplest, most powerful AI business co-pilot that connects to any
+  existing business system, requires zero workflow change from the owner's team,
+  and delivers real-time clarity on every aspect of the business through a
+  beautiful mobile experience and natural language conversation.
+
+Tagline:
+  "Your business, always awake."
+
+
+________________________________________________________________________________
+
+
+4. TARGET USERS
+________________________________________________________________________________
+
+PRIMARY USER — The Business Owner / Managing Director
+
+  Profile:
+    - Owns or runs a small-to-medium business (10–500 employees)
+    - Has an existing operational system (website, admin panel, POS, ERP)
+    - Is time-poor and cannot manually check dashboards regularly
+    - Makes final decisions on pricing, staffing, promotions, and strategy
+    - Uses a smartphone as their primary communication device
+    - Does not have a dedicated BI analyst or data team
+
+  Core Need:
+    To know the real-time health of their business — sales, customers,
+    inventory, team, finances — with minimal effort, from anywhere.
+
+SECONDARY USER — Operations Manager / Senior Staff
+
+  Profile:
+    - Manages day-to-day operations on behalf of the owner
+    - Needs departmental insights: logistics, customer service, inventory
+    - Role-based access (cannot see financials unless permitted)
+
+TERTIARY USER — Investors / Silent Partners (future)
+
+  Profile:
+    - Needs read-only high-level reporting
+    - Monthly/quarterly financial digest access
+
+
+________________________________________________________________________________
+
+
+5. PRODUCT SCOPE
+________________________________________________________________________________
+
+IN SCOPE (MVP — Version 1.0):
+
+  - Read-only connector to client's MySQL database
+  - Data sync engine (Laravel Scheduler + Queues, every 5 minutes or webhook-triggered)
+  - 6 core intelligence modules (detailed in Section 6)
+  - React Native mobile app via Expo (iOS + Android)
+  - AI co-pilot with natural language query ("Ask your business anything")
+  - Push notifications for proactive alerts
+  - Biometric login (fingerprint / Face ID)
+  - Offline mode (last-synced data available without internet)
+  - Multi-tenant architecture (one BizPulse deployment serves many clients)
+  - PDF report auto-generation (monthly financial digest)
+
+OUT OF SCOPE (MVP):
+
+  - Writing back to the client's database (read-only only in v1)
+  - Native POS or order management system
+  - Full ERP replacement
+  - Direct payment processing
+  - White-label app customization (v2 feature)
+  - Voice input (v2 feature)
+
+
+________________________________________________________________________________
+
+
+6. CORE FEATURES & MODULES
+________________________________________________________________________________
+
+MODULE 1 — SALES & REVENUE INTELLIGENCE
+
+  Real-time revenue ticker (updates every 60 seconds)
+  Revenue vs. yesterday, last week, last month comparison
+  Hourly sales heatmap (best hours and days by revenue)
+  Revenue forecasting (ML model predicts end-of-month target)
+  Anomaly alerts ("Sales dropped 40% in the last 2 hours")
+  Coupon and promotion ROI tracking
+  Refund and return rate analysis per product
+  Geographic sales map (district-level in Bangladesh)
+  Channel attribution (app vs. website vs. Facebook vs. direct)
+
+MODULE 2 — INVENTORY & SUPPLY CHAIN INTELLIGENCE
+
+  Dead stock radar (items with zero sales in 30+ days, capital at risk in BDT)
+  Reorder intelligence (stockout date prediction per SKU based on sell velocity)
+  Margin per SKU (profit after logistics cost)
+  Seasonal demand pattern detection
+  Bundle opportunity finder (products bought together → suggest combos)
+  Supplier performance tracking (late deliveries, quality complaints)
+  Price elasticity modeling per SKU
+  Warehouse aging report (FIFO compliance, expiry risk)
+
+MODULE 3 — CUSTOMER INTELLIGENCE & CRM LAYER
+
+  RFM scoring engine (auto-segments: Champions, Loyal, At Risk, Lost, New)
+  Churn prediction model (ML score per customer — probability of leaving)
+  Customer lifetime value (CLV) per customer — next 12 months forecast
+  Win-back automation (triggers personalized SMS/email to at-risk customers)
+  Sentiment analysis (NLP on reviews, Facebook comments, support tickets)
+  Next purchase prediction ("This customer likely to order within 12 days")
+  VIP early warning (alert when top customer order frequency drops)
+  Cohort retention curves (of Jan customers, how many still active in Apr?)
+
+MODULE 4 — FINANCIAL INTELLIGENCE
+
+  Auto-generated P&L statement (live gross profit and net margin, daily)
+  Cash flow projection ("At current burn, 47 days before reorder needed")
+  Monthly target vs. actual tracker with ETA to goal
+  Logistics cost per order breakdown (by courier and region)
+  Customer acquisition cost (CAC) calculator
+  Discount impact model (revenue lost vs. retention gained)
+  Brand-level profitability (which brand earns the most margin?)
+  Monthly financial digest PDF (auto-emailed on 1st of each month)
+
+MODULE 5 — PEOPLE & OPERATIONS INTELLIGENCE
+
+  Employee performance score (orders processed, CSAT, tickets resolved)
+  Delivery SLA tracker (on-time % per courier partner, per district)
+  Support ticket intelligence (avg resolution time, recurring complaints)
+  Content team ROI (which posts/campaigns drove actual sales spikes)
+  Shift vs. sales correlation (does revenue dip when X person is off?)
+  Order processing bottleneck detector (packing, dispatch, or courier?)
+  Fraud detection flags (unusual patterns, fake COD orders, address anomalies)
+  Capacity planning ("At current growth, need 1 more agent by June")
+
+MODULE 6 — AI CO-PILOT ("ASK YOUR BUSINESS ANYTHING")
+
+  Natural language query interface powered by Claude AI
+  NL-to-SQL translation (converts plain questions to database queries)
+  Instant answers to questions like:
+    - "Which product made me the most profit last month?"
+    - "Which customers haven't ordered in 60 days?"
+    - "Why did revenue drop last Tuesday?"
+    - "If I raise price of X by 15%, what happens to monthly profit?"
+  Action capabilities (with owner approval):
+    - "Draft a win-back message for my top 50 lapsed customers"
+    - "Generate this month's board report"
+    - "Send a discount code to VIP customers"
+  Simulation mode: scenario modeling with confidence ranges
+  Auto-generated daily/weekly insight summaries in plain language
+
+
+________________________________________________________________________________
+
+
+7. Q&A SECTION — BUSINESS OWNER PROBLEMS & SOLUTIONS
+________________________________________________________________________________
+
+This section maps real business owner pain points (Q) to the specific BizPulse
+feature or solution (A) that addresses them.
+
+─────────────────────────────────────────────────────────────────────────────
+
+SALES & REVENUE
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I have no idea how much revenue I've made today unless I log into my admin
+   panel and manually run a report. By the time I check, the day is half over.
+
+A: BizPulse shows a live revenue ticker on the home screen of the mobile app,
+   updated every 60 seconds. The moment the owner opens the app — or even
+   receives a morning push notification — today's sales figure is right there.
+   No login to the admin panel. No report to run.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I never know if today's sales are good or bad because I have no benchmark
+   to compare against.
+
+A: Every revenue figure in BizPulse is shown with automatic comparison deltas —
+   vs. yesterday, vs. the same day last week, and vs. the same day last month.
+   The owner sees not just the number but whether it is trending up or down and
+   by exactly how much.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: Sometimes revenue crashes mid-day and I only find out the next morning. By
+   then it's too late to do anything about it.
+
+A: The Revenue Anomaly Alert system monitors sales patterns continuously and
+   pushes an instant notification to the owner's phone the moment a significant
+   drop is detected — for example, "Sales are down 42% compared to the same
+   2-hour window yesterday." The owner can act immediately: check if the site is
+   down, if a courier partner has a problem, or if a promotion expired.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I don't know which hours of the day or days of the week generate the most
+   revenue, so I can't plan staffing or promotions intelligently.
+
+A: The Hourly Sales Heatmap shows revenue by hour and by day of week over the
+   last 30 days. The owner can immediately see that Sunday afternoons generate
+   3x more revenue than Tuesday mornings and schedule promotions and staff
+   accordingly.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I ran a 20% discount campaign last week but I have no idea if it actually
+   increased total revenue or just reduced my margins.
+
+A: The Promotion ROI Tracker attributes every order to the coupon or campaign
+   applied, calculates total revenue generated, total discount given, and net
+   margin impact. The owner sees clearly whether the promotion was profitable
+   or margin-destructive.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I have no way to predict whether I will hit my monthly revenue target.
+
+A: The Revenue Forecasting module uses a machine learning model trained on
+   historical sales patterns to project end-of-month revenue based on current
+   trajectory. It shows: "At today's run rate, you will end the month at
+   ৳38,20,000 — ৳1,80,000 short of your ৳40,00,000 target." The owner has
+   time to act.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I don't know which region of Bangladesh my orders are coming from, so I
+   can't focus marketing in the right areas.
+
+A: The Geographic Sales Map shows orders and revenue broken down by division
+   and district across Bangladesh. The owner can see that Chittagong drives
+   more revenue per customer than Sylhet and adjust courier partner selection
+   and ad targeting accordingly.
+
+─────────────────────────────────────────────────────────────────────────────
+
+INVENTORY & PRODUCTS
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I have products sitting in my warehouse for weeks with no sales and I only
+   discover them when I do a physical stock check.
+
+A: The Dead Stock Radar automatically flags any SKU with zero sales in the last
+   30 days and shows the total capital at risk in BDT. The owner sees: "CeraVe
+   Moisturizer 250ml — 148 units, no sales in 38 days — ৳74,000 at risk." This
+   appears as a priority alert every morning without any manual checking.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I've run out of stock on my best-selling products multiple times because I
+   didn't see it coming early enough.
+
+A: The Reorder Intelligence system calculates the sell velocity (units sold per
+   day) for every SKU and predicts the exact stockout date. When a product has
+   fewer than 7 days of stock remaining, the owner receives a push alert: "The
+   Ordinary Niacinamide 10% — 12 units left, selling 9/day — stockout in 1.3
+   days. Suggested reorder: 200 units."
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I know my product prices and my purchase prices, but I have no idea what
+   my actual profit is per product after courier cost, packaging, and returns.
+
+A: The Margin Per SKU module calculates true product profitability: sale price
+   minus purchase cost, minus logistics cost per delivery zone, minus return
+   rate impact. The owner discovers which products are genuinely profitable and
+   which are selling well but losing money on logistics.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: Demand for certain products spikes seasonally but I never stock up in time
+   because I forget the pattern from the previous year.
+
+A: The Seasonal Demand Pattern engine analyzes 12+ months of sales history and
+   automatically detects recurring patterns. In March it will alert: "Sunscreen
+   demand historically rises 280% in April. Current stock: 11 days. Recommend
+   ordering 3x normal quantity by March 28."
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I notice certain products are often bought together but I've never done
+   anything about it systematically.
+
+A: The Bundle Opportunity Finder analyzes purchase co-occurrence patterns and
+   surfaces the top product pairs and triplets most frequently bought together.
+   The owner can immediately create bundle promotions with confidence that
+   customers actually want these combinations.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I don't know which brands in my catalog are actually making me the most
+   money versus just generating revenue.
+
+A: Brand-Level Profitability shows gross margin by brand — so the owner sees
+   that while Somebymi generates the most revenue, The Ordinary actually
+   delivers higher margin per unit. This directly informs which brands to
+   prioritize in marketing spend.
+
+─────────────────────────────────────────────────────────────────────────────
+
+CUSTOMERS
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I have thousands of customers but no idea which ones are my most valuable
+   or which ones are about to leave.
+
+A: The RFM Scoring Engine automatically segments every customer daily based on
+   Recency (when they last ordered), Frequency (how often they order), and
+   Monetary value (total spend). Every customer gets a live status: Champion,
+   Loyal, At Risk, Cooling Down, or Lost — updated automatically with no
+   manual work.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: My best customers sometimes go quiet for weeks or months and I only
+   realize they've stopped ordering when it's too late to win them back.
+
+A: The VIP Early Warning system monitors the order frequency of every top
+   customer against their personal baseline. The moment a high-value customer's
+   ordering pattern drops below their normal rate, the owner receives an alert:
+   "Farida Begum (৳1,24,300 lifetime spend) hasn't ordered in 45 days — her
+   usual frequency is every 12 days. High churn risk." The owner can act before
+   the customer is truly lost.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I want to send personalized win-back messages to lapsed customers but I
+   don't have the time to identify them and write the messages manually.
+
+A: The Win-Back Automation module identifies at-risk and lapsed customers
+   automatically, drafts personalized messages using AI based on their purchase
+   history and preferences, and presents them to the owner for one-tap approval
+   before sending via SMS or WhatsApp Business API.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: Customers leave reviews on Facebook and my website but my team doesn't
+   systematically track what they're saying or whether sentiment is improving.
+
+A: The Sentiment Analysis engine uses NLP to continuously scan customer reviews,
+   Facebook comments, and support tickets. It produces a live Brand Health Score
+   (% positive, neutral, negative) and surfaces the top recurring complaint this
+   week so the owner can address systemic issues, not just individual tickets.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I have no way to predict which customers are likely to order again soon
+   so I can prioritize engagement.
+
+A: The Next Purchase Prediction model scores every active customer's likelihood
+   and timing of their next order. The owner can see: "These 48 customers are
+   likely to order in the next 3 days — no action needed. These 31 customers
+   are due to order but haven't — consider a gentle nudge."
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I don't know if the customers I acquired in a specific campaign are still
+   active months later, so I can't evaluate true campaign quality.
+
+A: Cohort Retention Curves track every group of customers acquired in a given
+   month and show what percentage are still ordering 1, 3, 6, and 12 months
+   later. This tells the owner which acquisition channels produce loyal customers
+   versus one-time buyers.
+
+─────────────────────────────────────────────────────────────────────────────
+
+FINANCES
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I don't have a real-time view of my gross profit and net margin. I only
+   find out how profitable the month was after my accountant runs the numbers.
+
+A: BizPulse generates a live P&L statement updated daily. The owner sees gross
+   revenue, COGS, gross profit, operating expenses, and estimated net margin in
+   real time — without waiting for month-end accounting. Early warning if the
+   month is trending below the profitability target.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I sometimes run out of cash to restock products because I didn't see the
+   cash flow gap coming early enough.
+
+A: The Cash Flow Projection module calculates projected inflows (expected
+   revenue at current trajectory) against projected outflows (pending supplier
+   payments, logistics costs, payroll estimates) and shows the owner: "At
+   current rate, you will need ৳18,00,000 for restock in 22 days. Projected
+   cash available: ৳14,50,000. Gap: ৳3,50,000." The owner has time to arrange
+   financing or accelerate collections.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I know how much I spend on couriers overall but not the actual cost per
+   order or which delivery zones cost me the most.
+
+A: The Logistics Cost Analyzer breaks down courier spend (Pathao, Redx,
+   Sundarban Courier) by order, by zone, and by month. The owner sees: "Orders
+   to Sylhet cost ৳180 average per delivery vs. ৳95 for Dhaka. Sylhet
+   contributes 8% of revenue but 14% of logistics cost." This informs delivery
+   zone pricing decisions.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I run discount campaigns regularly but I never actually calculate how much
+   revenue I'm giving away or what I'm getting in return.
+
+A: The Discount Impact Model tracks total discount value given per period, net
+   revenue generated by discounted orders, and the retention lift (do discounted
+   customers come back more often?). The owner can see the true net value of
+   every promotion strategy.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I have to ask my accountant for a report every time I need to show business
+   performance to a potential investor or partner.
+
+A: BizPulse auto-generates a professionally formatted PDF financial digest on
+   the 1st of every month and emails it directly to the owner (and any email
+   addresses they designate). It includes revenue summary, P&L snapshot, top
+   products, customer metrics, and key alerts from the month. No accountant
+   required for a snapshot report.
+
+─────────────────────────────────────────────────────────────────────────────
+
+TEAM & OPERATIONS
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I manage a team of 11–50 people but I have no objective way to evaluate
+   individual performance. I rely on what I hear from other team members.
+
+A: The Employee Performance Module tracks objective metrics per staff member:
+   orders processed per day, customer satisfaction scores (CSAT) on their
+   interactions, tickets resolved, and response time. The owner sees a ranked
+   performance score for each team member with specific data to back it up —
+   making performance conversations fair and factual.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I use multiple courier partners but I have no clear data on which ones
+   are actually delivering on time and which ones are causing complaints.
+
+A: The Delivery SLA Tracker logs every order's promised delivery time vs. actual
+   delivery time by courier partner. The owner sees on-time delivery percentage
+   by courier and by district. If Pathao is 94% on time in Dhaka but only 61%
+   on time in Chittagong, the owner knows to route Chittagong orders differently.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: My customer support team handles hundreds of tickets but I don't know how
+   long resolution takes or what issues come up repeatedly.
+
+A: The Support Intelligence module tracks average ticket resolution time, first
+   response time, and categorizes ticket types automatically. It surfaces the
+   top recurring complaint category each week so the owner can fix the root
+   cause rather than just handling individual cases.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: My content team posts on Facebook regularly but I have no way to know
+   whether their posts are actually driving sales or just getting likes.
+
+A: The Content ROI Tracker correlates content post dates and campaign launches
+   with sales spikes in the 24–72 hour window following publication. The owner
+   sees which posts generated measurable revenue lift vs. which had no
+   commercial impact. This allows the content team to focus on what works.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I sometimes receive suspicious orders — fake COD addresses, unusual bulk
+   orders from new accounts, or orders that always get returned. I catch
+   them too late.
+
+A: The Fraud Detection system flags orders that match anomalous patterns:
+   new accounts placing unusually large orders, repeated delivery failures
+   to the same address, or order profiles that match historical return abuse
+   patterns. Flagged orders are held for manual review before dispatch.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I know I'll need to hire more people as the business grows but I don't
+   know exactly when or in which department.
+
+A: The Capacity Planning module tracks growth rate of orders, ticket volume,
+   and delivery frequency against current team headcount and calculates the
+   point at which each department will become understaffed. The owner receives
+   a forward-looking alert: "At current order growth rate, your support team
+   will exceed capacity around week 3 of June. Recommend hiring 1 additional
+   support agent by late May."
+
+─────────────────────────────────────────────────────────────────────────────
+
+THE AI CO-PILOT
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: Even with a dashboard, I still need to know where to look. I don't have
+   time to navigate through multiple screens to find one answer.
+
+A: The AI Co-Pilot lets the owner type or speak any business question in plain
+   language — Bengali or English — and receive an immediate, accurate answer
+   drawn from live data. Examples:
+     "Aajke koto taka sales hoyeche?" (How much sales today?)
+     "Which product is making me the most profit this month?"
+     "Who are my top 10 customers by lifetime value?"
+   No navigation. No screen-hunting. Just ask and receive.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: When something goes wrong — a sales drop, a stock issue, a customer
+   complaint spike — I don't know why it happened, I just see the result.
+
+A: The AI Co-Pilot performs root cause analysis. If the owner asks "Why did
+   revenue drop last Tuesday?", the system traces the timeline: a major
+   courier partner had delays, which caused 38 order cancellations, which
+   triggered 14 negative reviews, which correlated with the drop. The owner
+   gets a causal chain, not just a number.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: Before changing a price or running a promotion, I want to know what will
+   actually happen to my profit — not just guess.
+
+A: The AI Co-Pilot includes a Simulation Mode. The owner can ask: "If I raise
+   the price of Somebymi Toner by 12%, what happens to my monthly profit?"
+   The system models the expected demand elasticity based on historical price
+   sensitivity and returns a confidence-ranged projection: "Estimated monthly
+   profit change: +৳28,000 to +৳44,000, assuming 8–14% volume reduction."
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I want to take actions — like sending a discount to my best customers —
+   but doing it manually through the admin system takes too long.
+
+A: The AI Co-Pilot can initiate actions on the owner's behalf with explicit
+   one-tap approval. The owner types: "Send a 15% discount code to customers
+   who haven't ordered in 30 days." The Co-Pilot identifies the list (e.g.,
+   247 customers), drafts the SMS message, shows the owner a preview, and
+   sends after a single approval tap. No admin panel required.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Q: I need to present business performance to a partner or investor but
+   putting together a report takes hours.
+
+A: The owner types: "Generate this month's business performance report."
+   The AI Co-Pilot assembles a structured PDF report with revenue summary,
+   P&L snapshot, top products, customer growth metrics, delivery performance,
+   and key highlights — formatted professionally and ready to share. Generated
+   in under 60 seconds.
+
+─────────────────────────────────────────────────────────────────────────────
+
+
+8. TECHNICAL ARCHITECTURE OVERVIEW
+________________________________________________________________________________
+
+The system is built in 5 distinct layers:
+
+LAYER 1 — CLIENT DATA SOURCES (unchanged, read-only)
+  MySQL database (existing client system)
+  Laravel REST API (if applicable)
+  External sources: Facebook Graph API, courier webhooks (Pathao, Redx)
+
+LAYER 2 — DATA SYNC ENGINE
+  Technology: Python
+  Sync frequency: Every 5 minutes (polling) or instant (webhook-triggered)
+  Components: MySQL connector, data transformer, Celery task queue, Redis cache
+
+LAYER 3 — AI & ANALYTICS ENGINE
+  Technology: Python, FastAPI, scikit-learn, pandas, Claude API
+  Components: RFM engine, churn model, revenue forecasting, NLP sentiment,
+              anomaly detection, NL-to-SQL, simulation engine
+
+LAYER 4 — BIZPULSE API SERVER
+  Technology: FastAPI, JWT authentication, WebSockets
+  Features: REST endpoints, live WebSocket feed, Firebase push notifications,
+            multi-tenant routing, role-based access control
+
+LAYER 5 — CLIENT APPLICATIONS
+  5a. Mobile App — Flutter (iOS + Android, single codebase)
+  5b. Web Dashboard — Next.js (desktop power users)
+
+INFRASTRUCTURE
+  Hosting: Railway.app (API server + PostgreSQL + Redis)
+  Database: PostgreSQL with TimescaleDB extension (time-series optimization)
+  File storage: Cloudflare R2 (PDF reports, exports)
+  CI/CD: GitHub Actions
+  Monitoring: Sentry (error tracking)
+
+
+________________________________________________________________________________
+
+
+9. TECH STACK
+________________________________________________________________________________
+
+DESIGN PRINCIPLES
+  - Zero investment from the developer. All infrastructure uses free or
+    open-source tools.
+  - No vendor lock-in. Every component is replaceable and self-hostable.
+  - Built on the developer's existing expertise: PHP, Laravel, React Native.
+  - AI features are pay-per-use by the client. The developer never pays
+    for AI API costs — owners configure and fund their own API keys.
+  - Analytics are SQL-native. No Python runtime or ML library required
+    for MVP. Intelligence is expressed as scheduled SQL queries and
+    PHP calculations running inside Laravel.
+
+─────────────────────────────────────────────────────────────────────────────
+
+MOBILE APP — React Native (Expo)
+  Framework       : React Native + Expo SDK (managed workflow)
+                    Developer's existing skill. iOS + Android from one
+                    JavaScript codebase. No Xcode or Android Studio required
+                    during development. EAS Build handles App Store and
+                    Play Store submission on the free tier.
+
+  Charts          : Victory Native XL
+                    Best charting library for React Native. Animated bar
+                    charts, line graphs, pie charts — all required for the
+                    BI dashboard. Smooth 60fps. Fully offline-capable.
+                    Free and open-source.
+
+  State mgmt      : Zustand
+                    Lightweight, zero-boilerplate state management.
+                    Simpler than Redux, perfect for dashboard data flows,
+                    live metric state, and alert queues. Free and OSS.
+
+  Server state    : React Query (TanStack Query)
+                    Handles API polling, background refresh, caching, and
+                    stale-while-revalidate for live dashboard data. Removes
+                    the need for manual interval polling. Free and OSS.
+
+  Push notif.     : Expo Notifications
+                    Free push notification service built into Expo.
+                    No Firebase account required for MVP. Handles both
+                    iOS and Android through Expo's infrastructure.
+                    Upgrade to Firebase FCM later if needed.
+
+  Auth            : expo-local-authentication
+                    Biometric login (fingerprint + Face ID) on both iOS
+                    and Android. One import, works out of the box. Free.
+
+  Offline storage : MMKV (via react-native-mmkv)
+                    10x faster than AsyncStorage. Used to cache the last
+                    synced dashboard state so the app shows data even
+                    without internet — critical for Bangladesh connectivity.
+                    Free and OSS.
+
+  HTTP client     : Axios
+                    Developer-familiar. Handles JWT token injection,
+                    request interceptors, and response error handling.
+                    Free and OSS.
+
+─────────────────────────────────────────────────────────────────────────────
+
+BACKEND API — Laravel 12
+  Framework       : Laravel 12 (PHP)
+                    Developer's primary expertise. Handles API routing,
+                    authentication, queues, scheduling, database connections,
+                    and AI integration in a single unified framework.
+                    No context switching between languages. Free and OSS.
+
+  AI integration  : Laravel AI SDK (laravel.com/ai)
+                    Laravel 12's first-party AI package (built on Prism).
+                    Provides a unified driver interface for Claude (Anthropic),
+                    OpenAI, Gemini, Mistral, and local Ollama models.
+                    The owner configures their own API key in app settings.
+                    Developer pays nothing. If the owner wants free AI,
+                    Gemini 1.5 Flash has a generous free tier and works
+                    through the same SDK driver interface.
+
+  Client DB conn. : Eloquent ORM (second DB connection)
+                    Laravel's config/database.php supports multiple database
+                    connections natively. The client's MySQL database is
+                    registered as a read-only secondary connection. No
+                    separate connector library required.
+
+  BizPulse DB     : Eloquent ORM (primary connection)
+                    Writes computed metrics, AI scores, alert history,
+                    user accounts, and tenant data to BizPulse's own
+                    PostgreSQL database (hosted free on Supabase).
+
+  Auth            : Laravel Sanctum
+                    Built into Laravel since v8. Issues API tokens for
+                    the mobile app. Multi-tenant isolation enforced via
+                    middleware — each token is scoped to one business tenant.
+
+  Task queue      : Laravel Queues (database driver)
+                    Replaces Celery entirely. The database queue driver
+                    requires zero additional infrastructure — queued jobs
+                    are stored in a database table and processed by a
+                    worker command. For MVP this is sufficient. Upgrade
+                    to Redis queue driver (Upstash free tier) when needed.
+
+  Scheduler       : Laravel Task Scheduler
+                    Built-in cron-based scheduler defined in routes/console.php.
+                    Runs data sync every 5 minutes, weekly metric recalculation,
+                    monthly PDF report generation — all without any external
+                    scheduling service.
+
+  Real-time push  : Laravel Broadcasting + Pusher Channels (free tier)
+                    Pusher free tier allows 200k messages/day and 100
+                    concurrent connections — sufficient for MVP with
+                    multiple clients. Fallback: polling via React Query
+                    if WebSocket is not needed immediately.
+
+  PDF generation  : DomPDF (barryvdh/laravel-dompdf)
+                    Pure PHP PDF generation from Blade templates. Zero
+                    server dependencies. Handles monthly financial digest
+                    reports. Free and OSS.
+
+  Excel export    : Laravel Excel (maatwebsite/excel)
+                    Export reports as XLSX or CSV. Handles large datasets
+                    with chunked reading. Free and OSS.
+
+─────────────────────────────────────────────────────────────────────────────
+
+AI & ANALYTICS — SQL-Native Intelligence
+  Philosophy      : All analytics for MVP are expressed as scheduled SQL
+                    queries and PHP calculations. This eliminates any Python
+                    runtime, ML library, or additional server dependency.
+                    The output is identical to what a Python scikit-learn
+                    model would produce at MVP scale — without the
+                    infrastructure overhead.
+
+  RFM scoring     : Pure SQL
+                    Recency: DATEDIFF(NOW(), MAX(order_date))
+                    Frequency: COUNT(order_id) per customer
+                    Monetary: SUM(order_total) per customer
+                    Runs as a scheduled Laravel job every night. Results
+                    written to BizPulse DB. No ML library needed.
+
+  Churn detection : Rule-based SQL heuristics
+                    Customers inactive beyond 1.5x their personal average
+                    order gap are flagged as At Risk. Beyond 2x: Cooling
+                    Down. Beyond 3x or 60 days: Churn Risk. Achieves 85%+
+                    of the accuracy of ML models for this use case at MVP
+                    scale. Runs nightly via Laravel Scheduler.
+
+  Forecasting     : Linear trend in PHP
+                    Last 14 days of revenue used to calculate slope.
+                    Slope extrapolated to end-of-month. Simple, explainable,
+                    and accurate enough for steady e-commerce growth curves.
+                    No external library needed.
+
+  Anomaly detect. : Rolling average SQL
+                    If current hour revenue < 50% of the same-hour 7-day
+                    rolling average, an alert is fired. Threshold is
+                    configurable per client. Runs every 15 minutes via
+                    Laravel Scheduler.
+
+  Sentiment       : Laravel AI SDK → LLM
+                    Customer reviews and support ticket text are batched
+                    and sent to the LLM (via owner's API key) for positive/
+                    neutral/negative classification. For MVP fallback:
+                    keyword-based matching in PHP requires no API at all.
+
+  NL-to-SQL       : Laravel AI SDK → LLM
+                    Owner's natural language question + database schema
+                    context is sent to the LLM. The LLM returns a safe,
+                    read-only SQL query. Laravel runs it on the client DB
+                    and returns the result. Owner's API key funds this.
+
+  PDF reports     : DomPDF via Blade templates
+                    Monthly financial digest auto-assembled from computed
+                    metrics in BizPulse DB. Emailed via Laravel Mail.
+                    No third-party report service required.
+
+─────────────────────────────────────────────────────────────────────────────
+
+DATA LAYER
+  BizPulse DB     : PostgreSQL via Supabase (free tier)
+                    500MB free. Stores computed metrics, RFM scores, churn
+                    flags, alert history, tenant accounts, and user data.
+                    One PostgreSQL instance serves all tenants via schema-
+                    level isolation. Supabase also provides a free REST API
+                    and built-in auth if needed later.
+
+  Client DB       : MySQL (client's existing server, read-only)
+                    Accessed via a dedicated read-only MySQL user created
+                    on the client's server. Laravel connects via secondary
+                    DB connection. No data is permanently copied — only
+                    computed aggregates are stored in BizPulse DB.
+
+  Cache           : Laravel Cache (file driver for MVP)
+                    File-based cache requires zero infrastructure. Caches
+                    computed dashboard metrics for 60 seconds so the API
+                    responds instantly. Upgrade to Upstash Redis (free tier:
+                    10,000 commands/day) when traffic demands it.
+
+  File storage    : Cloudflare R2 (free tier)
+                    10GB free storage, zero egress fees. Stores generated
+                    PDF reports and CSV exports. S3-compatible — Laravel's
+                    filesystem abstraction works with it out of the box
+                    via the S3 driver and a custom endpoint config.
+
+─────────────────────────────────────────────────────────────────────────────
+
+INFRASTRUCTURE — Platform-Independent, Zero Cost
+  Hosting option A: Client's own server (recommended for pilot)
+                    eMartway and similar clients almost certainly run an
+                    existing VPS or cPanel server. Deploy BizPulse Laravel
+                    as a separate application on their infrastructure.
+                    Zero hosting cost to the developer. Zero risk of
+                    platform lock-in.
+
+  Hosting option B: Fly.io (free tier)
+                    3 shared VMs free. Laravel runs natively via Docker.
+                    No vendor lock-in — fully Docker-based and portable
+                    to any host. Best independent hosting option with
+                    no sleep/cold-start issues on the free tier.
+
+  Hosting option C: Render.com (free tier)
+                    Free web service + free PostgreSQL (90-day trial).
+                    Services sleep after inactivity — acceptable for MVP
+                    demo but upgrade before giving to a paying client.
+
+  CI/CD           : GitHub Actions
+                    2,000 free minutes/month. Auto-deploy to any host on
+                    git push. Run tests, lint, and build pipeline. Entirely
+                    free for a solo developer project.
+
+  Monitoring      : Sentry (free tier)
+                    5,000 errors/month free. Alerts the developer when
+                    something breaks in the data pipeline before the client
+                    notices. Essential for a paid product.
+
+  Web dashboard   : Cloudflare Pages (free forever)
+                    Hosts the React (Next.js) web dashboard. Global CDN.
+                    Zero cost regardless of traffic volume.
+
+─────────────────────────────────────────────────────────────────────────────
+
+AI API COST MODEL — Owner Pays, Developer Pays Zero
+  The AI Co-Pilot, NL-to-SQL, and sentiment analysis features route
+  through the Laravel AI SDK using the owner's own API key, configured
+  in their BizPulse account settings. The developer never incurs AI
+  API costs. Owners choose their provider:
+
+  Gemini 1.5 Flash  : Free tier (generous limits) — recommended default
+  Claude Haiku      : ~$0.25 per million input tokens — affordable + capable
+  Claude Sonnet     : Higher quality for complex queries — owner's choice
+  OpenAI GPT-4o     : Available via same SDK driver interface
+  Ollama (local)    : Fully free — owner runs model on their own hardware
+
+  This model means BizPulse's AI features scale to any usage level
+  without the developer bearing any marginal cost.
+
+─────────────────────────────────────────────────────────────────────────────
+
+TOTAL MONTHLY INFRASTRUCTURE COST TO DEVELOPER
+  Supabase PostgreSQL : Free (500MB)
+  Fly.io hosting      : Free (3 VMs)
+  Cloudflare R2       : Free (10GB, zero egress)
+  Cloudflare Pages    : Free (web dashboard)
+  GitHub Actions      : Free (2,000 min/month)
+  Sentry monitoring   : Free (5,000 errors/month)
+  Expo push notif.    : Free (MVP scale)
+  Pusher Channels     : Free (200k messages/day)
+  AI API costs        : $0 (owner pays via own key)
+                        ─────────────────────────
+  TOTAL               : $0/month until meaningful scale
+
+MIGRATION PATH — When Revenue Justifies It
+  3 clients          : Add Upstash Redis free tier for queue driver upgrade
+  10 clients         : Upgrade Supabase to Pro ($25/month)
+  20+ clients        : Move to dedicated VPS ($20/month), full control
+  ML upgrade         : Add optional Python microservice for advanced models
+                       when clients fund it — Laravel calls it as an
+                       internal HTTP API, no rewrite required
+
+
+________________________________________________________________________________
+
+
+10. NON-FUNCTIONAL REQUIREMENTS
+________________________________________________________________________________
+
+PERFORMANCE
+  Dashboard load time       : < 2 seconds (cached data)
+  Live data refresh         : Every 60 seconds (WebSocket push)
+  AI Co-Pilot response time : < 5 seconds for standard queries
+  Push notification delay   : < 30 seconds from trigger event
+
+SECURITY
+  All database access       : Read-only (no write permissions to client DB)
+  Data in transit           : TLS 1.3 encryption
+  Data at rest              : AES-256 encryption
+  Authentication            : JWT with refresh tokens + biometric
+  Multi-tenancy             : Full data isolation per client (schema-level)
+  No client data shared     : Each client's data is strictly isolated
+
+AVAILABILITY
+  Target uptime             : 99.5% (allows ~3.6 hours downtime/month)
+  Offline mode              : Last-synced data available without internet
+  Graceful degradation      : App functions with cached data if API is down
+
+SCALABILITY
+  Architecture              : Multi-tenant from day one
+  New client onboarding     : < 1 hour to connect and activate a new client
+  Horizontal scaling        : Laravel + Docker deployable on any VPS or cloud host
+
+COMPLIANCE
+  Data residency            : Client data processed but not permanently stored
+                              (metrics stored, raw PII minimized)
+  GDPR awareness            : Data minimization principle applied
+
+
+________________________________________________________________________________
+
+
+11. MULTI-TENANT SAAS ARCHITECTURE
+________________________________________________________________________________
+
+BizPulse is designed from day one to serve multiple business clients from a
+single deployment — the foundation of the SaaS model.
+
+Tenant isolation strategy:
+  - Each client gets a separate PostgreSQL schema within the BizPulse database
+  - All API requests are authenticated with a tenant-scoped JWT
+  - Data from Client A is cryptographically inaccessible to Client B
+  - Each client's MySQL connector runs in an isolated Laravel Queue worker
+
+Onboarding a new client:
+  Step 1: Client provides read-only MySQL credentials (or API key)
+  Step 2: BizPulse runs schema discovery to map their tables automatically
+  Step 3: First sync runs, baseline metrics computed (< 1 hour)
+  Step 4: Client receives app download link and login
+  Step 5: Fully operational
+
+White-label capability (v2):
+  - Custom app name and branding per client
+  - Published under client's own App Store / Play Store account
+  - Separate subdomain for web dashboard
+
+
+________________________________________________________________________________
+
+
+12. MONETIZATION & PRICING
+________________________________________________________________________________
+
+PHASE 1 — CUSTOM BUILDS (NOW)
+
+  Setup Fee (one-time)      : ৳25,000 per client
+  Monthly Retainer          : ৳8,000 per client (maintenance + updates)
+  Report customization      : ৳5,000 per custom module
+
+  Economics at 5 clients:
+    Monthly revenue         : ৳40,000
+    Infrastructure cost     : $0 (all free tier)
+    Net monthly income      : ৳40,000 (~$364 USD)
+
+PHASE 2 — SAAS TIERS (6–12 months after launch)
+
+  Starter Plan              : $49/month
+    3 modules, 1 user, 5,000 orders/month cap
+
+  Growth Plan               : $99/month
+    All 6 modules, 3 users, unlimited orders, AI Co-Pilot basic
+
+  Pro Plan                  : $199/month
+    All modules, unlimited users, full AI Co-Pilot, white-label option,
+    priority support, custom integrations
+
+  Enterprise                : Custom pricing
+    Dedicated server, custom SLA, on-premise option
+
+PHASE 3 — VERTICAL EXPANSION
+
+  Restaurant edition        : $69/month (table turnover, food cost, chef KPIs)
+  Clinic edition            : $89/month (patient flow, doctor utilization)
+  Law firm edition          : $129/month (billable hours, case profitability)
+
+
+________________________________________________________________________________
+
+
+13. BUILD TIMELINE (MVP — SOLO DEVELOPER)
+________________________________________________________________________________
+
+Week 1–2    : Foundation
+              Read-only MySQL connector (Laravel secondary DB connection),
+              Laravel 12 project scaffolding, Sanctum API auth,
+              Supabase PostgreSQL schema design, multi-tenant middleware,
+              first scheduled data sync job running
+
+Week 3–4    : Core Analytics (SQL-native)
+              Revenue intelligence (daily/hourly aggregations in SQL),
+              Inventory analysis (dead stock radar, reorder prediction),
+              Anomaly detection (rolling average thresholds),
+              Laravel Queue workers, file-based cache layer
+
+Week 5–6    : Mobile App — Phase 1
+              React Native Expo project setup, home dashboard screen,
+              revenue and inventory panels with Victory Native charts,
+              Expo push notification setup, biometric login,
+              offline mode with MMKV, React Query data layer
+
+Week 7–8    : Customer & Financial Intelligence
+              RFM scoring engine (nightly SQL job),
+              Churn heuristic model (rule-based SQL),
+              CLV calculation, P&L auto-generation,
+              financial snapshot panel and customer screen in app
+
+Week 9      : AI Co-Pilot
+              Laravel AI SDK integration (owner API key config),
+              NL-to-SQL pipeline (schema context + LLM query),
+              natural language query interface in app,
+              sentiment classification, simulation mode (basic),
+              DomPDF monthly report generation + Laravel Mail
+
+Week 10     : Testing & Launch
+              End-to-end testing on eMartway live data,
+              performance optimization and query caching,
+              EAS Build — App Store + Play Store submission,
+              handover documentation, first client onboarding
+
+Total build time : 10 weeks (solo developer)
+MVP launch target: ~2.5 months from project start
+Total infra cost : $0/month (all free tier)
+
+
+________________________________________________________________________________
+
+
+14. SUCCESS METRICS
+________________________________________________________________________________
+
+PRODUCT METRICS (measure monthly)
+
+  Daily Active Usage        : Owner opens app at least once per day
+  Session frequency         : 3+ sessions per day (morning, midday, evening)
+  AI Co-Pilot queries       : 5+ queries per week per user
+  Push notification CTR     : > 40% (alert tapped within 5 minutes)
+  Offline access events     : Tracks how often offline mode saves the owner
+
+BUSINESS METRICS (measure quarterly)
+
+  Client retention rate     : > 90% monthly (subscription not cancelled)
+  Net Promoter Score (NPS)  : > 50 (owners actively refer the product)
+  New clients per month     : 2+ in Phase 1, 10+ in Phase 2 SaaS
+  Average revenue per user  : Growing quarter-over-quarter
+
+IMPACT METRICS (client outcomes — used as case studies)
+
+  Dead stock recovered      : BDT value of flagged inventory sold after alert
+  Churn prevented           : VIP customers retained via win-back automation
+  Revenue anomalies caught  : Alerts that led to owner action within the hour
+  Time saved per week       : Hours owner no longer spends on manual reporting
+
+
+________________________________________________________________________________
+
+
+15. RISKS & MITIGATIONS
+________________________________________________________________________________
+
+RISK 1: Client refuses to share database credentials
+  Mitigation: Offer read-only MySQL user creation guide. Offer API-based
+              integration (pull from client's existing Laravel API endpoints
+              rather than direct DB access). Offer on-premise data agent.
+
+RISK 2: Client's database schema is non-standard or poorly structured
+  Mitigation: Build schema discovery tool that maps tables automatically.
+              Handle messy schemas gracefully. Charge extra for custom mapping.
+
+RISK 3: Business owner loses interest after initial excitement
+  Mitigation: Design for daily habit. Morning push notification with key metric
+              creates a ritual. First 2 weeks of use are critical — schedule
+              weekly check-ins during onboarding.
+
+RISK 4: AI Co-Pilot gives incorrect answers
+  Mitigation: Always show the underlying data source with every answer.
+              Implement confidence scores. Sensitive actions (sending messages,
+              generating reports) require explicit owner approval.
+
+RISK 5: Infrastructure costs exceed projections at scale
+  Mitigation: Aggressive caching, query optimization, and per-client cost
+              tracking from day one. SaaS pricing designed with 70%+ margins.
+
+RISK 6: Competition from established BI tools (Power BI, Tableau, Metabase)
+  Mitigation: Those tools require setup expertise, ongoing maintenance, and
+              technical users. BizPulse requires zero setup from the owner and
+              is designed specifically for a non-technical MD on mobile.
+
+RISK 7: Data privacy concerns from clients
+  Mitigation: Read-only access, no raw data stored permanently, TLS encryption,
+              full data deletion capability on contract termination, clear
+              privacy policy in Bengali and English.
+
+
+________________________________________________________________________________
+
+
+16. FUTURE ROADMAP
+________________________________________________________________________________
+
+VERSION 2.0 (3–6 months post-launch)
+  Voice input — "Hey BizPulse, what's today's revenue?"
+  WhatsApp integration — receive daily summary via WhatsApp message
+  Write-back actions — reorder draft, customer message send (with approval)
+  White-label app — published under client's own brand and App Store account
+  Web dashboard — full Next.js dashboard for desktop users
+  Multi-user roles — manager, accountant, operations can have limited access
+
+VERSION 3.0 (6–12 months post-launch)
+  Restaurant edition — table management, kitchen KPIs, food cost analysis
+  Clinic edition — appointment flow, doctor performance, revenue per service
+  Law firm edition — billable hours, case win rate, invoice aging
+  API marketplace — connect to Shopify, WooCommerce, Tally ERP, bKash
+  Automated actions — reorder triggers, promotional sends on schedule
+  Competitor benchmarking — industry average comparisons (anonymized)
+
+VERSION 4.0 (12–24 months)
+  Predictive business planning — 3-month revenue and expense projections
+  Investor dashboard — dedicated view for board members and investors
+  Multi-location support — chains, franchises, multiple branches in one view
+  AI business advisor — proactive strategy suggestions ("You should expand to
+                         Chittagong — here's why, based on your data")
+  Open API — let clients connect BizPulse insights to their own tools
+
+
+________________________________________________________________________________
+
+END OF DOCUMENT
+
+BizPulse — Your business, always awake.
+
+For questions, partnership inquiries, or pilot program access:
+[Your Name] | [Your Email] | [Your Phone]
+
+________________________________________________________________________________

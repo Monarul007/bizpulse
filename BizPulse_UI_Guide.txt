@@ -1,0 +1,1524 @@
+================================================================================
+BIZPULSE — REACT NATIVE UI GUIDE
+Screen-by-Screen Design Specification for Google Stitch AI
+================================================================================
+
+Version       : 1.0
+Date          : April 13, 2026
+Purpose       : Prompt-ready UI specification for screen generation via Stitch AI
+App           : BizPulse — AI Business Intelligence Mobile App
+Platform      : React Native (Expo) — iOS + Android
+
+DESIGN LANGUAGE OVERVIEW
+  Theme         : AI-first, light intelligence, data clarity
+  Primary vibe  : Modern fintech meets AI assistant — clean, trustworthy, smart
+  Color system  : Light blue gradient base (#E8F4FD → #C2E0F8 → #90C7F0)
+                  Deep navy accents (#0A2540, #1A3A5C)
+                  AI purple highlights (#6C63FF, #8B7CF6)
+                  Success green (#00C896)
+                  Warning amber (#FFB020)
+                  Danger red (#FF4757)
+                  White surfaces (#FFFFFF, #F8FBFF)
+  Gradients     : Backgrounds use subtle top-to-bottom or diagonal gradients
+                  Cards use glass-morphism: white at 90% opacity, soft border
+                  Hero sections: deep navy (#0A2540) to AI blue (#1E6FCC)
+                  AI elements: purple-to-blue (#6C63FF → #3B9FE8)
+  Typography    : Headlines — SF Pro Display Bold / Inter Bold, 28–32px
+                  Subheadlines — SF Pro Display Semibold / Inter Semibold, 18–22px
+                  Body — SF Pro Text / Inter Regular, 14–16px
+                  Numbers/metrics — SF Pro Display Bold, tabular figures, 24–40px
+                  Labels — Inter Medium, 11–12px, letter-spacing 0.5px, uppercase
+  Spacing       : 16px base grid. Cards have 16px internal padding.
+                  Section gaps: 24px. Screen horizontal padding: 20px.
+  Corners       : Cards — 16px radius. Buttons — 12px radius. Pills — 20px radius.
+                  Bottom sheet — 24px top radius.
+  Shadows       : Cards — 0 4px 20px rgba(10,37,64,0.08)
+                  Elevated modals — 0 8px 40px rgba(10,37,64,0.16)
+  AI signature  : Every AI-generated element has a subtle left border or badge
+                  in gradient purple-to-blue (#6C63FF → #3B9FE8) with a
+                  small sparkle/star icon (✦) prefix.
+
+UX PRINCIPLES (scientifically proven — applied throughout)
+  1. Glanceability first — business owners check the app in 10-second bursts.
+     Every screen's most important number must be visible without scrolling.
+  2. Progressive disclosure — show the summary, tap to drill down. Never dump
+     all data on one screen.
+  3. Ambient awareness — the app should feel "alive." Subtle animations,
+     live tickers, and pulsing indicators signal that data is current.
+  4. Actionability over information — every insight must have a clear next
+     action. No data without a decision attached.
+  5. Trust signals — always show when data was last synced. Owners need to
+     know the numbers are real and current.
+  6. Cognitive load reduction — use color, icons, and position to communicate
+     status before text. A red badge means danger before the owner reads it.
+  7. Habitual design — morning push notification creates a daily ritual.
+     The home screen is designed to be the first thing opened each day.
+
+________________________________________________________________________________
+
+HOW TO USE THIS GUIDE WITH GOOGLE STITCH AI
+
+Each screen section below is structured as a self-contained prompt block.
+Copy the entire block for each screen into Stitch AI.
+Start every prompt with the GLOBAL STYLE HEADER below, then append the
+specific screen block.
+
+GLOBAL STYLE HEADER (prepend to every Stitch AI prompt):
+─────────────────────────────────────────────────────────
+Design a mobile app screen for BizPulse, an AI business intelligence app
+for business owners. The design language is: light blue gradient background
+(#E8F4FD to #C2E0F8), white glass-morphism cards (white 90% opacity, 1px
+light blue border, 16px radius, soft shadow), deep navy text (#0A2540),
+AI purple-to-blue gradient accents (#6C63FF to #3B9FE8), success green
+(#00C896), warning amber (#FFB020), danger red (#FF4757). Typography uses
+Inter Bold for numbers and headlines, Inter Regular for body. The overall
+vibe is modern fintech AI — clean, intelligent, trustworthy. Bottom
+navigation bar with 5 icons. Status bar at top showing time and battery.
+Safe area respected. Subtle gradient background throughout.
+─────────────────────────────────────────────────────────
+
+________________________________________________________________________________
+
+
+SCREEN 01 — SPLASH SCREEN / LOADING
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design a splash screen for BizPulse mobile app. Full screen deep navy-to-AI-blue
+gradient background (#0A2540 at top transitioning to #1E6FCC at bottom). Dead
+center: the BizPulse logo — a stylized waveform or pulse line that forms a
+letter B, in white, 80px wide. Below the logo: the wordmark 'BizPulse' in white
+Inter Bold 28px. Below wordmark: tagline 'Your business, always awake.' in white
+Inter Regular 14px, opacity 70%. At the very bottom center: a thin horizontal
+progress bar, 160px wide, with rounded ends, showing loading progress in white
+at 60% fill. Below progress bar: 'Connecting to your data...' in white 12px,
+opacity 50%. Subtle animated particles or dots floating in the background to
+convey AI intelligence. No other UI elements."
+
+DESIGN DETAILS:
+  Background      : Full bleed gradient — #0A2540 (top) → #1E6FCC (bottom)
+  Logo position   : Vertical center - 40px (slightly above true center)
+  Logo            : Pulse/waveform icon forming 'B', white, 80x80px
+  Wordmark        : 'BizPulse', white, Inter Bold, 28px, 8px below logo
+  Tagline         : 'Your business, always awake.', white 70% opacity,
+                    Inter Regular, 14px, 6px below wordmark
+  Progress bar    : 160px wide, 3px tall, white 30% bg, white fill, rounded
+                    Position: 48px above bottom safe area
+  Loading text    : 'Connecting to your data...' white 50%, 12px, 8px above bar
+  Particles       : 8-12 small white dots (4-8px) scattered, low opacity (15-25%)
+  Animation note  : Logo pulses gently. Progress bar fills left to right.
+
+PURPOSE: Sets the brand tone immediately. Navy-to-blue gradient signals
+intelligence and trust. The pulse icon metaphor — the app is monitoring
+the business heartbeat.
+
+________________________________________________________________________________
+
+
+SCREEN 02 — ONBOARDING 1 OF 3 — WELCOME
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design onboarding screen 1 of 3 for BizPulse mobile app. Light blue gradient
+background (#E8F4FD to #C2E0F8). Top 55% of screen: a clean illustration of a
+mobile phone showing a dashboard with colorful metric cards and a small AI
+chat bubble emerging from it, rendered in flat illustration style with deep navy
+and blue tones. Below illustration: large headline text 'Your business,\nin your
+pocket.' in deep navy (#0A2540) Inter Bold 28px, centered, line height 1.3.
+Below headline: body text 'BizPulse connects to your existing system and gives
+you real-time answers — without touching a single screen of your admin panel.'
+Inter Regular 15px, deep navy 60% opacity, centered, max width 300px. At bottom:
+three dot indicators showing position (first dot navy filled, two dots light gray),
+centered. Below dots: full-width button 'Get Started' with AI gradient fill
+(#6C63FF left to #3B9FE8 right), white text Inter Bold 16px, 56px tall, 20px
+horizontal margin, 16px radius. Below button: 'Already have an account? Sign in'
+text link in navy 60% opacity 13px."
+
+DESIGN DETAILS:
+  Background      : #E8F4FD (top) → #C2E0F8 (bottom), full screen
+  Illustration    : Occupies top 55% — flat style phone mockup with dashboard
+  Headline        : 'Your business, in your pocket.' navy, Bold 28px, centered
+  Body text       : Max 300px wide, centered, 60% navy, 15px, 8px below headline
+  Dot indicators  : 3 dots, 8px diameter, 6px gap, dot 1 navy, dots 2-3 #C5D9EA
+                    Position: 24px above button
+  CTA button      : Gradient #6C63FF → #3B9FE8, full width minus 40px margins
+                    'Get Started', white Bold 16px, 56px tall, 16px radius
+  Sign in link    : 'Already have an account? Sign in', navy 60%, 13px
+                    16px below button
+  Safe area       : Button sits 32px above bottom safe area
+
+________________________________________________________________________________
+
+
+SCREEN 03 — ONBOARDING 2 OF 3 — AI CO-PILOT INTRO
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design onboarding screen 2 of 3 for BizPulse. Same light blue gradient background.
+Top 50% of screen: illustration of a chat interface showing a business owner typing
+'What is my best selling product today?' and an AI response appearing below with
+a bar chart inline, rendered flat illustration style in blue and purple tones with
+a sparkle icon (✦) marking the AI response. Headline: 'Ask anything.\nGet answers
+instantly.' Inter Bold 28px deep navy centered. Body: 'Type a question in plain
+language. BizPulse queries your live data and answers in seconds — no SQL, no
+spreadsheets, no waiting.' Inter Regular 15px, navy 60%, centered, max 300px wide.
+Three dot indicators, second dot filled navy. Full-width gradient button 'See How
+It Works' same gradient as screen 1. Below: 'Skip' text link navy 50% 13px."
+
+DESIGN DETAILS:
+  Illustration    : Chat bubbles — user bubble right-aligned (light blue fill),
+                    AI bubble left-aligned (white with purple-blue left border 3px,
+                    ✦ sparkle icon in purple at start of text)
+                    Inline mini bar chart inside AI bubble showing 3 bars
+  Sparkle icon    : ✦ in #6C63FF, 14px, prefix to all AI-generated content
+  Headline        : 'Ask anything. Get answers instantly.' 28px Bold navy
+  Body            : 15px Regular navy 60%, max 300px, centered
+  Dot position    : Dot 2 of 3 filled
+  Button          : 'See How It Works', same gradient, 56px, 16px radius
+  Skip link       : Right-aligned, 13px, navy 50%, 20px from right edge
+
+________________________________________________________________________________
+
+
+SCREEN 04 — ONBOARDING 3 OF 3 — ZERO DISRUPTION PROMISE
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design onboarding screen 3 of 3 for BizPulse. Same light blue gradient background.
+Top 50%: illustration showing two systems side by side — left side: a complex admin
+panel with many buttons (labeled 'Your existing system', greyed out), right side:
+BizPulse mobile app showing a clean dashboard (colorful, clear) — with a green
+checkmark shield icon floating between them and an arrow going from left to right.
+Visual metaphor: we read your data, we don't touch your system. Headline: 'Zero
+disruption.\nPlug in and go.' Inter Bold 28px deep navy centered. Body: 'BizPulse
+reads your database with read-only access. Nothing changes in your current system.
+Setup takes under an hour.' Inter Regular 15px navy 60% centered max 300px. Three
+dot indicators, third dot filled. Full-width gradient button 'Connect My Business'
+in same gradient. Below button: small padlock icon + text 'Read-only access.
+Your data stays yours.' in navy 50% 12px centered."
+
+DESIGN DETAILS:
+  Illustration    : Side-by-side flat illustration, shield + checkmark in center
+                    Left panel greyed/muted, right panel (BizPulse) vibrant
+  Security note   : 🔒 padlock icon (12px) + text, row centered below button
+                    'Read-only access. Your data stays yours.' navy 50% 12px
+  Headline        : 'Zero disruption. Plug in and go.' Bold 28px navy
+  Button          : 'Connect My Business' — gradient, 56px tall, full width -40px
+  Dot position    : Dot 3 of 3 filled
+
+________________________________________________________________________________
+
+
+SCREEN 05 — CONNECT YOUR BUSINESS (SETUP)
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design a setup/connection screen for BizPulse mobile app. White background with
+subtle light blue gradient (#F8FBFF to #EDF5FF). Navigation bar at top: back
+arrow left, title 'Connect Your Business' Inter Bold 18px centered, skip link
+right 'Skip' navy 50% 14px. Top section (below nav): large icon of a database
+cylinder in blue gradient, 64px, centered. Below icon: headline 'Connect to your
+MySQL database' Inter Bold 22px navy centered. Subtext: 'Your credentials are
+encrypted and stored securely. BizPulse only reads — never writes.' navy 50%
+14px centered, max 280px. Form section with white cards (16px radius, light shadow):
+Card 1: labeled input field 'Database Host' with placeholder 'e.g. 192.168.1.1
+or db.mycompany.com', text input, blue focus border. Card 2: 'Port' input,
+placeholder '3306', numeric keyboard. Card 3: 'Database Name', text input.
+Card 4: 'Username (read-only user)', text input. Card 5: 'Password', password
+input with eye toggle. Below form: 'Test Connection' button — outlined style,
+navy border, navy text, full width. Below that: full-width gradient button
+'Connect & Start Syncing'. At very bottom: 'Need help? View setup guide →'
+text link in blue 13px. Progress indicator at top showing step 1 of 2."
+
+DESIGN DETAILS:
+  Background      : #F8FBFF → #EDF5FF subtle gradient
+  Nav bar         : Back arrow (20px), 'Connect Your Business' Bold 18px, 'Skip'
+  Step indicator  : 2-step progress bar below nav — step 1 filled blue, step 2 gray
+                    Full width minus 40px margins, 4px tall, 4px radius
+  Database icon   : Cylinder shape, blue gradient fill, 64x64px, centered
+  Headline        : 22px Bold navy, 16px below icon
+  Security note   : Padlock icon prefix, navy 50%, 14px, max 280px, centered
+  Form cards      : White bg, 1px #DCE8F5 border, 16px radius, 16px padding
+                    Each card: 12px label (uppercase, #6B8FAF, 0.5px spacing)
+                    above 16px input field. 12px gap between cards.
+  Input fields    : 48px tall, no border within card, navy text 16px
+                    Focus state: card border turns #3B9FE8 2px, soft blue shadow
+  Eye icon        : 20px, right side of password field, navy 40%
+  Test button     : Outlined — 1.5px navy border, navy text, 56px tall, 16px radius
+  Connect button  : Gradient #6C63FF → #3B9FE8, white Bold 16px, 56px, 16px radius
+  Help link       : '#3B9FE8', 13px, centered, 16px below button
+  Spacing         : 16px between each form card
+
+ADDITIONAL STATE — CONNECTION TESTING:
+  Overlay spinner : Semi-transparent white overlay on form
+                    Center: animated spinning circle in blue gradient
+                    Below spinner: 'Testing connection...' navy 60% 14px
+  Success state   : Green checkmark animation, 'Connected successfully!' green 16px
+                    Form cards get green left border 3px
+  Error state     : Red X animation, error message in red card below form
+                    'Connection failed: Invalid credentials' red 14px
+
+________________________________________________________________________________
+
+
+SCREEN 06 — SCHEMA DISCOVERY / SYNC PROGRESS
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design a sync progress screen for BizPulse. Deep navy-to-blue gradient background
+(#0A2540 to #1E3A5F). Centered vertically: large animated circular progress ring
+(120px diameter) with blue gradient stroke (#6C63FF to #3B9FE8), showing 65%
+completion, rotating. Inside the ring: '65%' in white Inter Bold 28px. Below ring:
+'Discovering your data' in white Inter Bold 20px centered. Below headline: animated
+list of completed steps appearing one by one, each line with a green checkmark
+prefix: '✓ Orders table — 12,847 records', '✓ Products table — 1,024 SKUs',
+'✓ Customers table — 8,392 customers', then a pulsing dot for current step:
+'● Calculating metrics...' in white 80% opacity. All text white, 14px Inter Regular,
+left-aligned within 280px centered block. At bottom: white card with rounded top
+corners (24px radius) rising from bottom — 'First sync takes 2-5 minutes. You'll
+get a notification when ready.' — navy text 14px centered, with a small clock icon.
+Below text in the card: 'You can close this screen' button — outlined white
+border, white text 14px, 44px tall."
+
+DESIGN DETAILS:
+  Background      : #0A2540 → #1E3A5F full screen gradient
+  Progress ring   : 120px diameter, 8px stroke width, gradient stroke
+                    Background track: white 15% opacity
+                    Percentage inside ring: white Bold 28px
+  Headline        : 'Discovering your data' white Bold 20px, 20px below ring
+  Step list       : Max 280px wide, centered on screen
+                    Completed: green ✓ (#00C896) + text white 100% 14px
+                    Current: blue pulsing dot + text white 80% 14px
+                    Pending: gray dot + text white 40% 14px
+                    8px gap between each step row
+  Bottom card     : White, 24px top radius, 20px padding, rises from bottom
+                    Clock icon (16px, navy 50%) + text navy 60% 14px centered
+                    'You can close this screen' — navy outlined 44px button
+                    Card height: 140px fixed, sits at very bottom including safe area
+
+________________________________________________________________________________
+
+
+SCREEN 07 — BIOMETRIC LOGIN / LOCK SCREEN
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design a biometric login screen for BizPulse mobile app. Full screen deep navy
+gradient (#0A2540 to #0D3470). Center top area: BizPulse logo (white pulse icon +
+wordmark) 24px above center. Below logo: 'Welcome back,' in white Inter Regular 16px
+then on next line the business owner's name 'Rahim Uddin' in white Inter Bold 24px.
+Below name: small text 'eMartway Skincare' in white 50% 14px. Center of screen:
+large fingerprint icon (80px) in white with a subtle blue glow ring around it
+(pulse animation). Below fingerprint: 'Touch to unlock' in white 60% 14px Inter
+Regular. Below that: 'or use PIN →' text link in blue (#3B9FE8) 13px. At very
+bottom (above safe area): 'Sign in as different account' in white 40% 12px centered.
+Subtle particle animation in background (floating dots in dark blue)."
+
+DESIGN DETAILS:
+  Background      : #0A2540 → #0D3470 radial or linear gradient
+  Logo            : White, 32px wordmark, 16px below top safe area + 60px
+  Greeting        : 'Welcome back,' white Regular 16px
+  Name            : Owner's name white Bold 24px, 4px below greeting
+  Business name   : White 50% Regular 14px, 4px below name
+  Fingerprint     : 80x80px icon, white, with pulsing glow ring in #3B9FE8 30% opacity
+                    Animation: ring pulses in and out every 1.5s
+  Unlock text     : 'Touch to unlock' white 60% 14px, 16px below icon
+  PIN link        : 'or use PIN →' #3B9FE8 13px, 12px below unlock text
+  Different account: white 40% 12px, 32px above bottom safe area
+  Particles       : 10-15 dots, 3-6px, white 8-15% opacity, scattered
+
+________________________________________________________________________________
+
+
+SCREEN 08 — PIN ENTRY SCREEN
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design a PIN entry screen for BizPulse. Deep navy gradient background. Top: back
+arrow left, title 'Enter PIN' white Inter Bold 18px centered. Below nav: 4 circular
+dot indicators (empty circles 16px diameter, white 30% border) to show PIN input
+progress — dots fill solid white as PIN is entered. 'Enter your 6-digit PIN' text
+below dots in white 60% 14px. Custom numeric keypad at bottom half of screen:
+3x4 grid of large round keys (72px diameter), numbers 1-9 then bottom row: empty
+left, 0 center, backspace right. Keys have white 10% background with white text
+Inter Bold 24px. Backspace key shows a delete arrow icon. Keys have active/pressed
+state with white 20% background. At top below dots: owner avatar circle (40px,
+initials 'RU' in white on blue gradient background) with name 'Rahim Uddin' white
+16px Bold. Business name small below. Subtle branding at very top corner."
+
+DESIGN DETAILS:
+  Background      : #0A2540 → #0D3470 same as biometric screen
+  Back arrow      : White, 20px, left side of nav
+  PIN dots        : 6 dots (for 6-digit PIN), 16px circles, white 30% border
+                    Filled state: solid white circle
+                    Gap between dots: 12px
+                    Position: centered, 40px below nav
+  Subtext         : 'Enter your 6-digit PIN' white 60% 14px, 12px below dots
+  Avatar          : 40px circle, gradient fill #6C63FF → #3B9FE8, initials white Bold 16px
+  Name + biz      : white Bold 16px name, white 50% 13px business, 12px left of avatar
+  Keypad grid     : Bottom 55% of screen
+                    Keys: 72px circles, white 10% bg fill, white text Bold 24px
+                    Row 1: 1, 2, 3 | Row 2: 4, 5, 6 | Row 3: 7, 8, 9
+                    Row 4: [empty], 0, [backspace icon]
+                    Key gap: 16px horizontal, 12px vertical
+  Forgot PIN link : 'Forgot PIN?' white 50% 13px, centered, 16px above keypad
+
+________________________________________________________________________________
+
+
+SCREEN 09 — HOME DASHBOARD (THE MOST IMPORTANT SCREEN)
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design the home dashboard screen for BizPulse AI business intelligence app. This
+is the most important screen — a business owner opens it every morning to see the
+health of their business at a glance. Light blue gradient background (#E8F4FD to
+#DCF0FF). Status bar at top (system). Custom navigation bar: left side shows
+BizPulse logo small (20px) + 'BizPulse' navy 16px Bold. Right side: notification
+bell icon with a red badge showing '3', and a circular avatar (32px) with owner
+initials. Below nav: greeting section — 'Good morning, Rahim 👋' navy Bold 22px,
+below that: 'Apr 12, 2026 · Last synced 2 min ago' in navy 50% 13px with a
+green pulsing dot (6px) before it to show live status. Hero metric card (full
+width, 20px margins): deep navy-to-blue gradient card (#0A2540 to #1E6FCC),
+24px radius, 20px padding — shows: top row label 'REVENUE TODAY' uppercase
+white 50% 11px tracking 1px, large number '৳1,84,320' white Inter Bold 36px,
+below number: '+18% vs yesterday' in green (#00C896) with up arrow 14px. Right
+side of card: small sparkline chart (80px wide, 40px tall) in white 30% showing
+today's hourly revenue trend. Below hero card: section label 'AT A GLANCE' navy
+50% 11px uppercase. 2x2 grid of white metric cards (16px radius, soft shadow):
+card 1: '247' navy Bold 24px, 'Orders today' navy 50% 12px, '+31 since 8AM'
+green 11px. Card 2: '৳745' navy Bold 24px, 'Avg order value' navy 50% 12px,
+'▼ ৳42 vs last week' red 11px. Card 3: '94%' navy Bold 24px, 'On-time delivery'
+navy 50% 12px, 'Pathao · Redx' navy 40% 11px. Card 4: '82%' navy Bold 24px,
+'Sentiment score' navy 50% 12px, '✦ AI-analyzed' purple 11px. Below grid:
+section 'AI ALERTS' with 3 alert cards stacked vertically. Alert card style:
+white background, 16px radius, left border 4px (red for critical, amber for warning,
+green for info), 16px padding. Alert 1 (red border): small red dot, bold text
+'Churn risk:' then 'Farida B., Nusrat J., Maliha R. haven't ordered in 45+ days'
+navy 14px, below: blue text link 'Send win-back →'. Alert 2 (amber border):
+amber dot, 'Dead stock: CeraVe Moisturizer — 148 units, ৳74,000 at risk', link
+'Fix it →'. Alert 3 (green border): green dot, 'Trending: Somebymi Toner up 340%'
+link 'View →'. Bottom navigation bar: 5 icons — Home (active, blue), Sales, Inventory,
+Customers, More. Active icon has blue fill with small gradient pill background."
+
+DESIGN DETAILS:
+  Status bar      : Standard iOS/Android, dark text on light bg
+  Nav bar         : 56px tall, white bg, 1px #DCE8F5 bottom border
+                    Left: logo 20px + 'BizPulse' Bold 16px navy, 8px gap
+                    Right: bell icon 24px (red badge 16px with '3'), avatar 32px circle
+  Greeting        : 'Good morning, Rahim 👋' Bold 22px navy, 20px below nav
+  Sync status     : Green pulsing dot 6px + 'Apr 12 · Synced 2m ago' navy 50% 13px
+                    6px below greeting
+  Hero revenue card:
+    Size          : Full width minus 40px margins, 24px radius
+    Background    : Gradient #0A2540 (left) → #1E6FCC (right)
+    Label         : 'REVENUE TODAY' white 50% 11px uppercase, tracking 1px
+    Main number   : '৳1,84,320' white Inter Bold 36px, tabular figures
+    Delta         : ▲ '+18% vs yesterday' #00C896 14px, 4px below number
+    Sparkline     : Right-aligned in card, 80x40px, white 30% stroke, no axes
+    Padding       : 20px all sides
+    Margin top    : 16px below sync status
+  At A Glance grid:
+    Section label : 'AT A GLANCE' navy 50% 11px uppercase tracking 1px, 20px above grid
+    Grid          : 2 columns, 2 rows, 12px gap
+    Each card     : White, 16px radius, 16px padding, soft shadow
+                    Value: navy Bold 24px | Label: navy 50% 12px | Delta: colored 11px
+  AI Alerts section:
+    Section label : 'AI ALERTS — NEEDS YOUR ATTENTION' navy 50% 11px uppercase
+                    Small ✦ sparkle in #6C63FF before label
+    Alert cards   : White bg, 16px radius, 4px left border, 16px padding, 8px gap
+                    Status dot: 8px circle matching border color
+                    Title: navy Bold 14px | Body: navy 60% 13px, 1 line max then truncate
+                    Action link: #3B9FE8 13px Bold '→' suffix
+  Bottom nav      : 72px tall (including safe area), white bg, 0.5px top border #DCE8F5
+                    5 items: Home, Sales, Inventory, Customers, More
+                    Active item: icon in gradient blue, label Bold 10px blue
+                    Inactive: icon navy 40%, label navy 40% 10px
+                    Active has 32x4px pill bg in #E8F4FD behind icon
+  Scroll behavior : Page scrolls, nav bar fixed at bottom
+
+MICRO-INTERACTIONS:
+  Revenue number  : Animates up (count-up) when screen loads — 0 → ৳1,84,320
+  Sync dot        : Pulses green every 2 seconds
+  Alert cards     : Slide in from right on first load, staggered 100ms each
+  Hero card       : Subtle shimmer effect while loading
+
+________________________________________________________________________________
+
+
+SCREEN 10 — HOME DASHBOARD — MORNING BRIEFING CARD (EXPANDED)
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design a bottom sheet / modal card for BizPulse that appears as an expanded
+morning briefing. This slides up from the bottom over the home dashboard. The
+overlay behind it is navy 40% opacity. The bottom sheet: white background, 24px
+top radius, full width, height 75% of screen. Top of sheet: 32px drag handle
+(gray pill, 4px tall, 40px wide, centered, 8px from top). Below handle: header row:
+left side '✦ Morning Briefing' with ✦ in gradient blue-purple, 'Morning Briefing'
+navy Bold 18px. Right: 'Apr 12, 2026' navy 50% 13px. Thin divider line below header.
+Content: 4 sections each with a colored icon and text. Section 1 (blue icon — chart):
+'Revenue yesterday was ৳1,58,400 — your best Tuesday in 3 months.' Section 2
+(green icon — checkmark): '247 orders so far today. On track to exceed yesterday.'
+Section 3 (red icon — alert): '3 VIP customers show churn risk. Immediate action
+recommended.' Section 4 (amber icon — box): '2 products need reorder within 3 days.'
+Each section: 48px tall, icon left 32px, text navy 14px, chevron right for drill-down.
+Below sections: full-width AI gradient button 'Ask about today →' 56px. Below button:
+'Dismiss' gray text link 14px centered."
+
+DESIGN DETAILS:
+  Overlay         : #0A2540 at 40% opacity, tappable to dismiss
+  Sheet           : White, 24px top-left and top-right radius only
+  Drag handle     : 4x40px, #D1DDE8, centered, 12px from top
+  Header          : 56px tall, 20px horizontal padding
+                    ✦ icon gradient animated, 'Morning Briefing' Bold 18px navy
+                    Date right-aligned navy 50% 13px
+  Divider         : 1px #F0F5FA full width
+  Section rows    : 56px tall each, 20px horizontal padding
+                    Left: 32x32px icon in colored rounded square (8px radius)
+                    Text: navy 14px Regular, max 2 lines
+                    Right: chevron > navy 40% 16px
+                    Bottom: 1px #F8FAFC divider (except last item)
+  Icon colors     : Blue (#3B9FE8), Green (#00C896), Red (#FF4757), Amber (#FFB020)
+  CTA button      : 'Ask about today →' gradient #6C63FF → #3B9FE8, 56px, 16px radius
+                    20px horizontal margin
+  Dismiss         : '#8FA3B8' 14px, centered, 12px above button, 12px below button
+
+________________________________________________________________________________
+
+
+SCREEN 11 — SALES & REVENUE MODULE — MAIN SCREEN
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design the Sales Intelligence screen for BizPulse mobile app. Light blue gradient
+background. Top: standard nav bar with back arrow and title 'Sales & Revenue' Bold
+18px navy, right side: date filter pill '7 days ▾' (white bg, navy text, 1px navy
+border, 20px radius, 32px tall). Below nav: a large revenue summary card spanning
+full width (minus 20px margins): gradient navy-to-blue card. Four rows inside card:
+Row 1: 'TOTAL THIS PERIOD' label white 50% 11px uppercase, then '৳12,84,240' white
+Bold 32px below it. Row 2: small row of 3 comparison chips: '▲18% vs last week',
+'▲31% vs last month', '▼2% vs target' — small pills with colored text. Row 3:
+thin white 20% divider line. Row 4: 3 column mini-stats: '247 orders', '৳745 AOV',
+'4.2% return rate' each in white, value Bold 18px, label 10px below. Below main card:
+section 'REVENUE TREND' with a line chart card: white card, chart fills card width
+minus padding, shows 7-day revenue line in blue gradient stroke with filled area
+below in blue 10% opacity, x-axis shows dates, y-axis shows ৳ values, today's
+point highlighted with a navy dot + tooltip showing value. Below chart: section
+'TOP PRODUCTS THIS PERIOD' — stacked list cards, each showing: product name navy
+Bold 14px, horizontal bar showing relative sales volume (blue fill, gray bg), revenue
+amount right-aligned navy 14px Bold. Show top 5 products. Below that: 'SALES BY
+CHANNEL' section — horizontal bar chart card showing App vs Website vs Facebook vs
+Direct with colored bars and percentage labels."
+
+DESIGN DETAILS:
+  Nav bar         : Back arrow, 'Sales & Revenue' Bold 18px, date filter pill right
+  Date filter     : '7 days ▾', white bg, 1px #C5D9EA border, 20px radius, 32px tall
+                    Tap opens dropdown: Today / 7 days / 30 days / 90 days / Custom
+  Revenue summary card:
+    Gradient      : #0A2540 → #1B5FAD, full width -40px, 20px radius
+    Total label   : 'TOTAL THIS PERIOD' white 50% 11px uppercase, 16px from top
+    Amount        : '৳12,84,240' white Bold 32px tabular, 4px below label
+    Comparison chips: Row of pills, 8px gap between, 12px below amount
+                    Up: #00C896 text, rgba(0,200,150,0.15) bg
+                    Down: #FF4757 text, rgba(255,71,87,0.15) bg
+                    12px height, 8px horizontal padding, 6px radius
+    Divider       : white 20% opacity, 1px, 12px margin vertical
+    Mini-stats    : 3 equal columns, center-aligned each
+                    Value: white Bold 18px | Label: white 40% 10px
+  Revenue trend chart:
+    Card          : White, 16px radius, 16px padding
+    Section label : 'REVENUE TREND' navy 50% 11px uppercase, 20px above card
+    Chart         : Height 160px inside card
+                    Line: #3B9FE8 2px stroke, rounded joins
+                    Fill: #3B9FE8 10% opacity below line
+                    Axes: navy 20% 10px labels
+                    Highlighted point: navy filled dot 8px + white ring
+    Legend        : Not needed (single line)
+  Top products list:
+    Each row      : White card, 12px radius, 12px padding, 8px gap between
+                    Rank number: navy 50% 13px Bold, left
+                    Product name: navy Bold 14px, max 180px
+                    Bar: full width - 40px, 6px tall, 4px radius, bg #F0F5FA
+                    Fill: gradient #6C63FF → #3B9FE8, width proportional to max
+                    Revenue: navy Bold 14px, right-aligned
+  Channel chart   : White card, 16px radius, horizontal bars, 120px tall
+                    4 channels, each bar 20px tall, 6px gap
+                    Colors: App #6C63FF, Website #3B9FE8, Facebook #FFB020, Direct #00C896
+
+________________________________________________________________________________
+
+
+SCREEN 12 — REVENUE ANOMALY ALERT (FULL SCREEN NOTIFICATION)
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design a full-screen urgent alert modal for BizPulse. Dark semi-transparent overlay
+(#0A2540 80% opacity). Centered modal card: white, 24px radius, 320px wide, 20px
+padding. Top of card: large red circle icon (64px diameter) with an animated
+exclamation mark (!) in white, 28px Bold. Below icon: 'Revenue Alert' red (#FF4757)
+Bold 20px centered. Below title: main message in navy Bold 16px centered: 'Sales
+dropped 42% in the last 2 hours'. Below message: context box — light red bg
+(#FFF0F0), 8px radius, 12px padding — showing: '⬇ ৳45,200 below 2-hour average'
+red 14px Bold, then 'Expected: ৳1,08,000 · Actual: ৳62,800' navy 50% 12px.
+Below context: thin divider. 'POSSIBLE CAUSES — AI ANALYSIS' label with ✦ purple
+sparkle, then 3 bullet rows: '• Website may be experiencing issues', '• Courier
+delays reported in your area', '• Check if a promo code expired' — navy 14px each.
+Below: two buttons stacked — 1st: gradient blue 'Investigate Now' full width 48px,
+2nd: outlined navy 'Dismiss' full width 44px. Timestamp at bottom: 'Detected at
+2:34 PM today' navy 40% 12px centered."
+
+DESIGN DETAILS:
+  Overlay         : #0A2540 80% covers full screen, not dismissable by tap
+  Modal card      : White, 24px radius, 320px wide, auto height, centered vertically
+  Alert icon      : 64px red circle #FF4757, ! in white Bold 28px, pulsing animation
+  Title           : 'Revenue Alert' #FF4757 Bold 20px, 12px below icon
+  Message         : navy Bold 16px, 8px below title, max 260px centered
+  Context box     : #FFF0F0 bg, 8px radius, 12px padding, 12px below message
+                    Main figure: #FF4757 Bold 14px
+                    Sub figures: navy 50% 12px, 4px below
+  AI analysis     : ✦ purple sparkle icon 12px + label navy 50% 11px uppercase
+                    3 bullet items: navy 14px, 8px between, 12px padding left
+  Buttons         : 12px gap between
+                    Investigate: gradient #6C63FF → #3B9FE8, white Bold 15px, 48px tall
+                    Dismiss: 1.5px navy border, navy text 15px, 44px tall
+  Timestamp       : navy 40% 12px, 12px below buttons, centered
+
+________________________________________________________________________________
+
+
+SCREEN 13 — INVENTORY INTELLIGENCE — MAIN SCREEN
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design the Inventory Intelligence screen for BizPulse. Light blue gradient background.
+Nav bar: back arrow, 'Inventory' Bold 18px, filter icon right (funnel icon). Below
+nav: horizontal scrollable tab bar with 4 tabs: 'Overview' (active — blue underline
+and text), 'Dead Stock', 'Reorder Now', 'Fast Movers' — white bg, navy 50% inactive,
+navy Bold active, 13px text, 40px tall tabs. Below tabs: Overview content. Top section:
+3 summary stat cards in a row (each taking 1/3 width): '1,024 SKUs' navy Bold 20px,
+'Total SKUs' 11px navy 50%. '৳4,20,000 at risk' red Bold 18px, 'Dead stock value'
+11px navy 50%. '3 urgent' amber Bold 20px, 'Need reorder' 11px navy 50%. Each card:
+white, 12px radius, 12px padding. Below stats: 'DEAD STOCK RADAR' section header
+with ✦ sparkle. 3 alert cards stacked: each white card 16px radius, red left border
+4px. Left side: product image placeholder (40x40px rounded square gray). Right of
+image: product name Bold 14px navy, brand name 12px navy 50%, then red text
+'৳74,000 at risk · 38 days inactive' 12px. Right side of card: amber pill '148 units'.
+Below product cards: 'REORDER SIGNALS' section. 3 cards with amber left border:
+product name, '12 units left' amber Bold, 'Stockout in 1.3 days' red 12px, 'Reorder
+200 units →' blue link 12px. Chart section: white card with a horizontal bar chart
+showing top 5 slow-moving products by days-inactive."
+
+DESIGN DETAILS:
+  Nav bar         : Standard, filter funnel icon right (navy, 24px)
+  Tab bar         : White bg, 0.5px bottom border #E0EAF5
+                    Active: navy Bold 13px + 2px #3B9FE8 bottom underline
+                    Inactive: navy 50% Regular 13px
+                    Tabs: equal width, 40px tall, no scroll indicator
+  Summary cards   : Flex row, 12px gap, 20px horizontal padding
+                    Height: 72px each
+                    White, 12px radius, 12px padding
+                    Value: Bold 20px (red for at-risk, amber for urgent, navy for normal)
+                    Label: navy 50% 11px uppercase, 4px below value
+  Section headers : Navy 50% 11px uppercase tracking 1px + ✦ prefix in purple 12px
+                    20px above first card in section
+  Dead stock cards:
+    Height        : 76px
+    Left border   : 4px #FF4757
+    Image         : 40x40px rounded square #F0F5FA bg (placeholder)
+    Product name  : Bold 14px navy, truncated
+    Brand         : navy 50% 12px, 2px below name
+    Risk text     : '#FF4757' 12px, 2px below brand
+    Units pill    : '#FFB020' text, '#FFF3E0' bg, 20px radius, 8x16px padding, right-aligned
+  Reorder cards   :
+    Left border   : 4px #FFB020
+    Stockout text : '#FF4757' 12px Bold
+    Reorder link  : '#3B9FE8' 12px Bold
+
+________________________________________________________________________________
+
+
+SCREEN 14 — PRODUCT DETAIL DRILL-DOWN
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design a product detail screen for BizPulse inventory module. White background.
+Navigation: back arrow, product name as title 'CeraVe Moisturizer 250ml' truncated,
+share icon right. Top section: product hero card — light blue gradient (#E8F4FD to
+#DCF0FF), 16px radius, 20px padding — shows: left side product image placeholder
+(80x80px rounded square). Right of image: product name Bold 18px navy, brand
+'CeraVe' navy 50% 14px, SKU code '#SKU-0024' navy 30% 12px. Below: status badge
+row — 'DEAD STOCK' pill in red bg/text + '38 days inactive' amber pill. Below hero
+card: 4 metric cards in 2x2 grid: '148 units' with 'In stock' label. '0 units/day'
+red with 'Sell velocity' label. '৳74,000' red with 'Capital at risk' label. '৳500'
+with 'Unit purchase cost' label. Below grid: 'SALES HISTORY' chart — white card,
+line chart showing 90-day sales history, the line is flat at zero for last 38 days
+(shown in red dashed section vs blue solid earlier period). Below chart: 'AI RECOMMENDATION'
+section — card with purple-to-blue left border gradient 4px, ✦ sparkle header,
+white bg. Text: 'This product has been inactive for 38 days with ৳74,000 tied up.
+Consider running a 20% flash sale to clear stock within 14 days.' Two action buttons:
+'Create Promotion' gradient blue, 'Mark for Liquidation' outlined navy."
+
+DESIGN DETAILS:
+  Hero card       : #E8F4FD → #DCF0FF gradient, 16px radius, 20px padding
+  Product image   : 80x80px, #F0F5FA bg, 12px radius, left-aligned
+  Name            : Bold 18px navy, right of image block
+  Brand + SKU     : Stacked, navy 50% 14px and navy 30% 12px
+  Status badges   : Row, 8px gap
+                    Dead Stock: #FF4757 text, #FFF0F0 bg, 12px radius, 6x12px padding
+                    38 days: #FFB020 text, #FFF8E0 bg, same sizing
+  Metric grid     : 2x2, 12px gap, 20px horizontal padding
+                    Each: white card 12px radius, value Bold 22px, label 11px uppercase
+                    At-risk values in red (#FF4757)
+  Sales chart     : White card, 160px height, 90-day range
+                    Blue solid line for active period, red dashed for inactive period
+                    Zero line shown as gray dashed
+                    Red region shaded #FFF0F0 for inactive period
+  AI Rec card     : White bg, 4px left border gradient #6C63FF → #3B9FE8
+                    ✦ sparkle + 'AI RECOMMENDATION' label purple 11px uppercase
+                    Text: navy 14px 1.6 line-height
+  Action buttons  : 12px gap, 20px margins
+                    Create Promotion: gradient, 48px tall
+                    Liquidation: outlined navy, 44px tall
+
+________________________________________________________________________________
+
+
+SCREEN 15 — CUSTOMER INTELLIGENCE — MAIN SCREEN
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design the Customer Intelligence screen for BizPulse. Light blue gradient background.
+Nav bar with back arrow, 'Customers' Bold 18px, search icon right. Below nav:
+horizontal tabs: 'Overview', 'VIP Customers', 'At Risk', 'Segments' — same tab
+style as inventory screen. Overview tab content: Top section — 'CUSTOMER HEALTH'
+summary row of 3 cards: '8,392 Total', '247 New this month', '3 Churn risk' (red Bold).
+Below: large RFM SEGMENTS card — white, 16px radius, shows a horizontal stacked bar
+divided into 5 segments with colored fills and labels below: Champions (navy 35%),
+Loyal (blue 25%), At Risk (amber 20%), New (green 12%), Lost (red 8%). Each segment
+labeled with count below. Below RFM bar: 'MOST VALUABLE CUSTOMERS' section —
+list of 5 customer cards. Each card: white, 12px radius, 12px padding, flex row.
+Left: avatar circle (40px, initials, colored bg). Center: customer name Bold 14px
+navy, total spend navy 50% 12px, order count navy 40% 12px. Right: status pill —
+'Active' green, 'Churn risk' red, 'Cooling down' amber. Tapping a customer opens
+their detail screen. Below list: 'SENTIMENT OVERVIEW' section — white card with
+three sentiment bars (Positive 82% green, Neutral 12% gray, Negative 6% red) and
+top complaint of the week below in AI card style."
+
+DESIGN DETAILS:
+  Tabs            : Same as Inventory screen, 4 tabs
+  Health cards    : Same 3-up row style, 72px each
+                    'Churn risk' card: red value, red 30% bg tint
+  RFM bar card    : White, 16px radius, 20px padding
+                    'RFM SEGMENTS' navy 50% 11px uppercase header
+                    Stacked bar: full width, 24px tall, 8px radius
+                    Segment colors: Navy #1A3A5C, Blue #3B9FE8, Amber #FFB020,
+                                    Green #00C896, Red #FF4757
+                    Labels below bar: 12px navy 50%, centered under segment
+  Customer list   :
+    Avatar        : 40px circle, unique gradient per customer (5 different)
+                    Initials: white Bold 14px
+    Name          : Bold 14px navy
+    Spend         : navy 50% 12px — '৳1,24,300 lifetime'
+    Orders        : navy 40% 12px — '38 orders'
+    Status pill   : Right-aligned, 12px text, 20px radius, 6x12px padding
+                    Active: #00C896 text, #E0FBF4 bg
+                    Churn risk: #FF4757 text, #FFF0F0 bg
+                    Cooling down: #FFB020 text, #FFF8E0 bg
+  Sentiment card  : White, 16px radius, 20px padding
+                    3 bars with label + percentage + colored fill
+                    Bar: 8px tall, full width, 4px radius, bg #F0F5FA
+                    AI complaint section below bars: light purple tint bg, ✦ prefix
+
+________________________________________________________________________________
+
+
+SCREEN 16 — CUSTOMER DETAIL SCREEN
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design a customer profile screen for BizPulse. White background, subtle light blue
+tint. Navigation: back arrow, 'Customer Profile' Bold 18px, 3-dot menu right. Top:
+hero section — gradient card (#E8F4FD to #DCF0FF), 20px padding. Avatar circle 64px
+centered (initials 'FB', gradient blue bg). Below avatar: customer name 'Farida Begum'
+Bold 22px navy centered. Below name: 'Customer since Jan 2022' navy 50% 13px centered.
+Row of 3 stats: '৳1,24,300' Bold 20px navy 'Lifetime Value', '38' Bold 20px 'Total Orders',
+'12 days' Bold 20px 'Avg. frequency'. Status badge centered: large 'CHURN RISK' pill
+red bg/text Bold 14px. Below hero: white card 'ORDER HISTORY' with sparkline chart
+showing order frequency over 12 months — dots for each order, gap at end showing
+inactivity, dashed line for expected frequency. Below chart: 'Last order: 45 days ago'
+red Bold 14px. Below order history: 'TOP PURCHASES' list — top 3 product categories
+this customer buys, with small product icons and spend amount. Below that: 'AI INSIGHT'
+card with ✦: 'Farida typically orders every 12 days. She is now 45 days overdue —
+3.75x her normal cycle. Win-back probability is high with a personalized offer.'
+Large gradient button: 'Send Win-Back Message'. Below: 'View Full Order History →'
+blue link."
+
+DESIGN DETAILS:
+  Hero card       : #E8F4FD → #DCF0FF, 0px radius (full bleed below nav)
+  Avatar          : 64px circle, centered, gradient #6C63FF → #3B9FE8, white initials Bold 22px
+  Customer name   : Bold 22px navy, 8px below avatar
+  Since text      : navy 50% 13px, 4px below name
+  Stat row        : 3 equal columns, 16px below 'since' text
+                    Value: Bold 20px navy | Label: navy 50% 11px uppercase, 4px below
+  Status badge    : Centered, 8px below stats
+                    Churn Risk: #FF4757 text, #FFF0F0 bg, 12px radius, 8x16px padding, Bold 14px
+  Order history card:
+    Chart         : 240px wide, 80px tall — dots connected by thin line
+                    Active period: #3B9FE8 dots and line
+                    Inactive gap: dashed red line showing expected orders not placed
+                    X-axis: months abbreviated, navy 20% 10px
+  Last order text : '#FF4757' Bold 14px, centered in card below chart
+  Top purchases   : 3 rows, each: category icon (24px colored square) + name + spend right
+  AI insight card : White, 4px gradient left border (#6C63FF → #3B9FE8)
+                    ✦ 'AI INSIGHT' purple 11px uppercase header
+                    Text: navy 14px, 1.6 line-height, 2-3 sentences
+  Win-back button : Gradient #6C63FF → #3B9FE8, white Bold 15px, 56px tall, 16px radius
+
+________________________________________________________________________________
+
+
+SCREEN 17 — WIN-BACK MESSAGE COMPOSER (AI GENERATED)
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design a win-back message composer screen for BizPulse. White background. Navigation:
+back arrow (X icon — closing flow), 'Win-Back Message' Bold 18px, customer name chip
+right 'Farida B.' (small navy pill 12px). Top section: recipient summary card —
+light blue tint bg, 12px radius, 12px padding — showing avatar (32px), name, last
+order date, and total spend in a single compact row. Below: channel selector row —
+3 tabs with icons: SMS (phone icon), WhatsApp (WhatsApp icon), Email — active one
+highlighted in blue, 40px tall chips with border. Main content: white card labeled
+'AI-GENERATED MESSAGE' with ✦ sparkle and purple AI badge top-right showing 'Claude'.
+Inside: the message text fully editable in a text area — 'Hi Farida! We've missed
+you at eMartway. As one of our most valued customers, here's an exclusive 15% off
+your next order: FARIDA15. Valid for 7 days. Reply to claim.' Text in navy 15px
+Regular, editable. Below text area: character count '143 / 160 characters' navy 40%
+12px right-aligned. Below card: 'Offer settings' section — two row controls:
+Discount: '-' button, '15%', '+' button (plus/minus steppers). Validity: '7 days'
+with stepper. Preview button: 'Preview Message' outlined. Bottom: large gradient
+button 'Send Now — Farida Begum' with green send icon. Below button: 'Schedule
+for later' blue link 13px."
+
+DESIGN DETAILS:
+  Recipient card  : #E8F4FD bg, 12px radius, 12px padding
+                    Avatar 32px + name Bold 14px + last order 12px navy 50% + spend right
+  Channel tabs    : 3 equal pills, 40px tall, 8px gap
+                    Active: blue fill, white icon + text, 12px radius
+                    Inactive: #F0F5FA bg, navy 50% icon + text
+  AI message card : White, 16px radius, 16px padding
+                    Header: ✦ 'AI-GENERATED MESSAGE' navy 50% 11px uppercase
+                    AI badge: 'Claude' gradient pill top-right (purple → blue, white text 11px)
+                    Text area: navy 15px, 1.7 line-height, editable, min 4 lines
+                    No border on text area itself (card is the container)
+  Char count      : navy 40% 12px, right-aligned, 8px below text area
+  Offer settings  : White card, 16px radius, 12px padding
+                    Row: label navy Bold 14px left, stepper right (- value +)
+                    Stepper: 32px circle buttons, navy border, navy text
+                    Value: navy Bold 16px, 40px min-width centered
+  Preview btn     : Outlined navy, 44px, full width, 16px radius
+  Send button     : Gradient #00C896 (success green) → #3B9FE8, white Bold 15px, 56px
+                    Green send icon (16px) left of text, 8px gap
+  Schedule link   : '#3B9FE8' 13px centered, 12px below button
+
+________________________________________________________________________________
+
+
+SCREEN 18 — FINANCIAL INTELLIGENCE — MAIN SCREEN
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design the Financial Intelligence screen for BizPulse. Light blue gradient background.
+Nav bar: back arrow, 'Financials' Bold 18px, PDF export icon right (document icon with
+down arrow). Month selector bar below nav: left chevron, 'April 2026' Bold 14px navy
+centered, right chevron — 44px tall, white bg. Main P&L card: full width minus
+40px margins, gradient navy-to-blue, 20px radius, 24px padding. Inside card: 3 rows:
+Row 1: 'GROSS REVENUE' white 40% 11px uppercase + '৳38,24,100' white Bold 28px.
+Row 2: 'COST OF GOODS' white 40% 11px + '(৳22,18,300)' white 60% 22px. Thin white
+20% divider line. Row 3: 'GROSS PROFIT' white 60% 11px Bold uppercase + '৳16,05,800'
+white Bold 28px + '41.9% margin' green pill #00C896 text white 11px. Below P&L card:
+2x2 grid of white metric cards: 'Target gap' red Bold 20px '৳3,75,200' label 'Behind
+monthly target', 'CAC' navy Bold 20px '৳847', 'Avg order margin' green Bold 20px '28%',
+'Monthly orders' navy Bold 20px '1,847'. Below grid: 'BRAND PROFITABILITY' section —
+white card with horizontal bar chart showing gross margin % per brand: Somebymi,
+CeraVe, The Ordinary, Cosrx — bars colored by margin (green for high, amber for medium,
+red for low). Below brand chart: 'LOGISTICS COST BREAKDOWN' white card with donut
+chart showing Pathao vs Redx vs Sundarban vs Other courier costs with legend below."
+
+DESIGN DETAILS:
+  Month selector  : White bg, 0.5px #E0EAF5 border top and bottom, 44px tall
+                    Chevrons: navy 40%, 20px, tappable 44px hit area
+                    Month: Bold 14px navy centered
+  P&L card        : #0A2540 → #1B5FAD gradient, full width -40px, 20px radius, 24px pad
+                    Revenue row: label white 40% 11px, value white Bold 28px, 8px below
+                    COGS row: label white 40% 11px, value white 60% 22px (smaller, negative)
+                    Divider: white 20% 1px, 12px vertical margin
+                    Profit row: label white 60% Bold 11px, value white Bold 28px
+                    Margin pill: #00C896 text, rgba(0,200,150,0.2) bg, 12px radius, right-aligned
+  Metric grid     : 2x2, 12px gap
+                    Each: white 12px radius, 12px padding
+                    Target gap card: red tint bg (#FFF8F8), red value
+  Brand chart     : White card, horizontal bars 20px tall each, 8px gap
+                    Labels left (product name 12px), bars fill, % right
+                    Color thresholds: >30% green, 20-30% amber, <20% red
+  Donut chart     : 120px diameter, 20px stroke, centered in card
+                    Colors: Pathao #3B9FE8, Redx #6C63FF, Sundarban #FFB020, Other #C5D9EA
+                    Legend below: 2x2 grid, dot + label + % amount
+
+________________________________________________________________________________
+
+
+SCREEN 19 — CASH FLOW PROJECTION
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design a cash flow projection screen for BizPulse. White background. Nav: back arrow,
+'Cash Flow' Bold 18px. Top: urgency banner if cash flow risk — red gradient banner
+(#FF4757 to #FF6B7A) full width, 20px padding: warning icon (white 24px) + 'Projected
+cash gap in 22 days' white Bold 14px + '৳3,50,000 shortfall' white Bold 18px. Below
+banner: white card 'PROJECTED CASH FLOW' with a 30-day area chart: green shaded area
+above zero line (cash in), red shaded area below zero line (cash out risk), blue line
+showing net cash position, today marked with vertical dashed navy line. X-axis: dates,
+Y-axis: BDT values. Below chart: two cards side by side: 'Projected inflows' green card
+showing '৳18,24,000' and breakdown list (Revenue ৳16,20,000, Pending collections ৳2,04,000).
+'Projected outflows' red card showing '৳21,74,000' and breakdown (Restock ৳18,00,000,
+Logistics ৳2,44,000, Operations ৳1,30,000). Below cards: 'AI RECOMMENDATION' card with
+✦ and text: 'You need ৳3,50,000 in 22 days. Options: (1) Accelerate collections from
+wholesale orders, (2) Delay non-urgent restock by 2 weeks, (3) Apply for a short-term
+credit line.' Three action buttons for each option."
+
+DESIGN DETAILS:
+  Urgency banner  : Only shown when gap exists. #FF4757 → #FF6B7A gradient
+                    16px top radius (attaches to nav), 20px padding
+                    Warning icon 24px white, 8px gap, text stacked
+  Cash flow chart : White card, 200px chart height
+                    Green area: rgba(0,200,150,0.15) fill, #00C896 0.5px top border
+                    Red area: rgba(255,71,87,0.10) fill, #FF4757 0.5px top border
+                    Net line: #3B9FE8 2px stroke
+                    Today line: navy 40% dashed 1px
+  Inflow card     : #F0FBF7 bg, 1px #00C896 border, 12px radius
+                    '৳18,24,000' #00C896 Bold 22px
+                    Breakdown: 12px navy 50% rows with dividers
+  Outflow card    : #FFF0F2 bg, 1px #FF4757 border, 12px radius
+                    Amount #FF4757 Bold 22px
+  AI options      : Each option on its own row with small numbered badge
+                    Badge: gradient blue circle 20px, white Bold 12px
+                    Text: navy 14px | Action link: blue 13px Bold right
+
+________________________________________________________________________________
+
+
+SCREEN 20 — TEAM PERFORMANCE SCREEN
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design the Team Performance screen for BizPulse. Light blue gradient background.
+Nav: back arrow, 'Team' Bold 18px, month period label right 'April 2026' navy 50% 13px.
+Top: department filter chips horizontal scroll row: 'All' (active, blue fill), 'Sales',
+'Support', 'Logistics', 'Content' — 32px tall pill chips. Below filters: 'PERFORMANCE
+LEADERBOARD' section header. Stacked employee cards (5 total). Each card: white, 16px
+radius, 16px padding, flex row. Left: rank number Bold 18px navy in a colored square
+(1st = gold gradient, 2nd = silver, 3rd = bronze, rest = light gray) 36x36px 8px radius.
+Next: avatar circle 44px with initials. Right of avatar: employee name Bold 15px navy,
+role navy 50% 13px. Right of name block: performance score Badge — large pill showing
+score out of 100. Score color: green >80, amber 60-79, red <60. Below name: 3 micro-stats
+in a row: orders processed, CSAT score, response time — each with icon and value 12px.
+Bottom of card: thin horizontal performance bar full width showing score visually with
+gradient fill. Below leaderboard: 'TEAM ALERTS' section — 2 cards for issues: amber
+border card for 'Karim — 3 late dispatches this week' and a note about following up."
+
+DESIGN DETAILS:
+  Department chips: Horizontal scroll, no scrollbar visible
+                    Active: gradient #6C63FF → #3B9FE8, white text, Bold 13px
+                    Inactive: white bg, navy 50% 13px, 1px #DCE8F5 border
+                    32px tall, 12px horizontal padding, 20px radius, 8px gap
+  Leaderboard     :
+    Card height   : 104px
+    Rank badge    : 36x36px, 8px radius
+                    1st: gradient #FFD700 → #FFA500
+                    2nd: gradient #C0C0C0 → #A0A0A0
+                    3rd: gradient #CD7F32 → #8B4513
+                    4+: #F0F5FA bg, navy 40% text
+                    Rank Bold 18px centered in badge
+    Avatar        : 44px circle, unique gradient per person
+    Name          : Bold 15px navy
+    Role          : navy 50% 13px, 2px below name
+    Score badge   : Right-aligned, 40x24px pill, Bold 14px
+                    >80: #00C896 text, #E0FBF4 bg
+                    60-79: #FFB020 text, #FFF8E0 bg
+                    <60: #FF4757 text, #FFF0F0 bg
+    Micro-stats   : Row of 3, each: icon 14px + value 12px Bold + label 10px
+                    Order count, CSAT %, Avg response time
+    Performance bar: Full width, 4px tall, 4px radius
+                    bg #F0F5FA, fill gradient blue, width = score%
+  Team alerts     : Amber border 4px left, white bg, standard alert card style
+
+________________________________________________________________________________
+
+
+SCREEN 21 — AI CO-PILOT SCREEN (CHAT INTERFACE)
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design the AI Co-Pilot chat screen for BizPulse — the 'Ask your business anything'
+interface. Deep navy gradient background (#0A2540 to #0D3470) for the chat area.
+Nav bar: back arrow, center shows ✦ sparkle icon + 'BizPulse AI' white Bold 18px,
+right: small green dot + 'Live data' white 50% 12px. Below nav: thin divider. Chat
+area fills screen. Show a conversation history with alternating messages. User messages
+right-aligned: white 90% opacity bg, navy text 15px, 16px radius (all corners except
+bottom-right). AI responses left-aligned: gradient card (#1E3A5C to #162E4A), white
+text 15px, 16px radius, with ✦ sparkle icon 12px in gradient blue before text. AI
+responses that contain data show an inline mini chart or table inside the message bubble —
+for example a small 3-bar chart for 'top 3 products' query. Show 3 conversation turns:
+Turn 1 — User: 'What's my best selling product today?' / AI response with mini bar chart
+showing top 3 products. Turn 2 — User: 'How many customers are at risk of churning?' /
+AI response: '3 VIP customers show high churn risk. Their total lifetime value is
+৳3,01,900.' with a small customer list inline. Turn 3 — User bubble visible. Bottom:
+fixed input bar — white card with 20px radius, shadow. Left: text field 'Ask anything
+about your business...' placeholder navy 30% 15px. Right: gradient send button 44x44px
+circle. Above input: quick suggestion chips horizontal scroll: 'Today's revenue →',
+'Top products →', 'Churn risk →', 'Cash flow →' — small navy 50% chips."
+
+DESIGN DETAILS:
+  Background      : #0A2540 → #0D3470, full screen behind chat
+  Nav bar         : Dark bg matching gradient, no border
+                    Back: white arrow
+                    Title: ✦ gradient sparkle 16px + 'BizPulse AI' white Bold 18px
+                    Right: green dot 8px + 'Live data' white 50% 12px
+  Chat messages   :
+    User bubbles  : right-aligned, max 70% screen width
+                    bg: white 12% opacity (glassmorphism), white text 15px
+                    16px radius except bottom-right = 4px
+                    12px padding, 8px between messages
+    AI bubbles    : left-aligned, max 80% screen width
+                    bg: #1E3A5C, white text 15px
+                    16px radius except bottom-left = 4px
+                    ✦ 12px gradient icon before first word (not inline)
+                    Actually ✦ sits as a small floating icon top-left of bubble
+                    Typing indicator: 3 pulsing dots in white 50% when loading
+    Inline charts : Inside AI bubble, 180px wide, 80px tall
+                    Bars or lines in white 60% with labels in white 40% 10px
+                    Simple, minimal axis labels
+    Inline lists  : Inside AI bubble, white 80% dividers between items
+                    Item: white Bold 14px name + right value white 60% 12px
+  Time stamps     : Centered between message groups, white 30% 11px
+  Quick chips     : Horizontal scroll, above input bar, 12px from input top
+                    Each chip: white 10% bg, white 60% text 12px, 16px radius
+                    32px tall, 12px horizontal padding, 8px gap
+  Input bar       : Fixed at bottom, white bg, 20px top radius
+                    24px horizontal padding, 16px vertical padding
+                    Input: no border, navy 15px, placeholder navy 30%
+                    Send button: 44x44px circle, gradient #6C63FF → #3B9FE8
+                    Send icon: white arrow 20px
+  Bottom safe area: Input bar respects safe area padding
+
+DATA CONTEXT NOTE FOR AI RESPONSES:
+  Every AI response bubble shows a subtle bottom row:
+  'Based on data synced 2 min ago' — white 20% 10px, right-aligned
+
+________________________________________________________________________________
+
+
+SCREEN 22 — AI CO-PILOT — NATURAL LANGUAGE QUERY RESULT (FULL SCREEN)
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design a full-screen query result view for BizPulse AI Co-Pilot. This appears when
+the AI answer requires a detailed view. White background. Nav: back arrow (X), title
+from query 'Best selling products today' Bold 18px navy, share icon right. Below nav:
+query recap card — light purple tint bg (#F0EEFF), 12px radius, 12px padding: small
+✦ sparkle icon + original question text in italic navy 13px + 'Asked just now' navy
+40% 11px. Below: AI answer text card — white 16px radius, 16px padding — ✦ header
+'AI ANSWER' purple 11px uppercase, then full answer paragraph in navy 15px 1.7 line-height.
+Below answer: 'DATA VISUALIZATION' section — white card with full bar chart showing
+the data (e.g. top 10 products ranked by today's revenue, horizontal bars, product
+names left, revenue values right, bars in gradient blue). Below chart: 'RAW DATA'
+collapsible section — expandable card showing data table (product | units sold | revenue
+| vs yesterday) in 13px monospace, alternating row colors. Bottom: two action buttons:
+'Export as CSV' outlined, 'Share Report' gradient blue. Small text below: '✦ Answer
+generated from live data · April 12, 2026 2:41 PM'"
+
+DESIGN DETAILS:
+  Query recap     : #F0EEFF bg, 12px radius, 12px padding
+                    ✦ #6C63FF 12px + italic query text navy 13px
+                    'Asked X ago' navy 40% 11px right-aligned
+  Answer card     : White, 16px radius, 16px padding
+                    '✦ AI ANSWER' purple (#6C63FF) 11px uppercase tracking 1px
+                    Answer text: navy 15px, 1.7 line-height, 12px below header
+  Data viz card   : White, 16px radius, 20px padding
+                    'DATA VISUALIZATION' navy 50% 11px uppercase header
+                    Chart: horizontal bar chart, 200px total height
+                    Bars: 20px tall, gradient #6C63FF → #3B9FE8, 8px radius right
+                    Product names: navy 13px left, truncated to 140px
+                    Values: navy Bold 13px right of bar
+  Raw data        : Collapsed by default, 'View raw data ▾' navy 13px toggle
+                    Expanded: alternating #F8FBFF / white rows
+                    Header: uppercase 11px navy 50%
+                    Cell text: 13px navy, monospace font for numbers
+  Export/Share    : Same row, equal width, 12px gap
+                    Export: outlined navy, 44px
+                    Share: gradient #6C63FF → #3B9FE8, 44px
+  Attribution     : '✦ Answer generated from live data · timestamp' — navy 30% 11px centered
+
+________________________________________________________________________________
+
+
+SCREEN 23 — NOTIFICATIONS CENTER
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design the Notifications screen for BizPulse. White background, light blue gradient.
+Nav: back arrow, 'Notifications' Bold 18px, 'Mark all read' blue text link right 13px.
+Below nav: filter tab row: 'All' (active), 'Alerts', 'AI Insights', 'Reports' — tab
+style. Below tabs: today's notifications section label 'TODAY' navy 50% 11px uppercase.
+Notification cards stacked, each 72px minimum height, white bg, 16px radius, 12px padding:
+Card type 1 (unread — blue left border 4px): churn alert icon (red circle 32px with
+person icon white), text 'Churn risk detected' Bold 14px navy, '3 VIP customers haven't
+ordered in 45+ days' navy 50% 13px, time '2 hours ago' navy 30% 12px right. Card type 2
+(AI insight — purple left border): ✦ sparkle icon purple circle 32px, 'AI Weekly Insight'
+Bold 14px navy, 'Your top product is running low. Reorder suggestion ready.' navy 50% 13px.
+Card type 3 (report — green left border): document icon green circle 32px, 'Monthly Report
+Ready' Bold 14px navy, 'March 2026 financial digest is ready to view.' Unread cards have
+a subtle blue tint background (#F5F9FF). Yesterday section below today section. Empty state:
+centered illustration of a notification bell with checkmark and text 'All caught up!' navy
+Bold 16px + 'No new notifications' navy 50% 13px."
+
+DESIGN DETAILS:
+  Filter tabs     : Same horizontal tab style, 4 items, 40px tall
+  Section labels  : 'TODAY', 'YESTERDAY' navy 50% 11px uppercase, 20px padding, 16px above first card
+  Notification cards:
+    Unread state  : #F5F9FF bg, 4px left border (color by type), 16px radius
+    Read state    : White bg, 4px left border 50% opacity
+    Icon circle   : 32x32px, 8px radius, unique color per type
+                    Churn = red, AI insight = purple, Report = green, Revenue = blue
+    Title         : Bold 14px navy
+    Body          : navy 50% 13px, max 2 lines, truncated
+    Time          : navy 30% 12px, right-aligned, vertically centered
+    Unread dot    : 8px blue circle right edge, vertically centered
+  Swipe actions   : Swipe left reveals 'Dismiss' red button, 'Snooze' amber button
+  Empty state     : Bell illustration 80px, 'All caught up!' Bold 16px, 'No new notifications' 13px
+                    Both centered in remaining screen space
+
+________________________________________________________________________________
+
+
+SCREEN 24 — SETTINGS SCREEN
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design the Settings screen for BizPulse. White background. Nav: back arrow or hamburger,
+'Settings' Bold 18px. Below nav: user profile section — large card with gradient bg
+(#E8F4FD to #DCF0FF), 16px radius, 20px padding: avatar circle 64px (initials, gradient),
+name Bold 18px navy, business name navy 50% 14px, plan badge 'Growth Plan' in blue pill.
+'Edit Profile' text link blue 13px. Below profile: settings sections as grouped lists
+(iOS-style). Section 1 'CONNECTION': rows for 'Database Connection' (green status dot +
+'Connected'), 'Sync Frequency' (subtitle '5 minutes'), 'Manual Sync Now' (blue action).
+Section 2 'AI CO-PILOT': 'AI Provider' (subtitle 'Gemini 1.5 Flash (free tier)'),
+'API Key' (subtitle '••••••••3f9a'), 'AI Language' (subtitle 'Bengali + English').
+Section 3 'NOTIFICATIONS': toggle rows for 'Revenue Alerts', 'Churn Alerts', 'Stock Alerts',
+'Daily Briefing' — all with iOS-style toggle switches. Section 4 'REPORTS': 'Monthly Report
+Email', 'Export Format', 'Report Recipients'. Section 5 'SECURITY': 'Biometric Login'
+toggle, 'Change PIN', 'Active Sessions'. Section 6 'ACCOUNT': 'Manage Subscription',
+'Invite Team Member', 'Help & Support', 'Privacy Policy', 'Sign Out' (red text)."
+
+DESIGN DETAILS:
+  Profile card    : #E8F4FD → #DCF0FF, 16px radius, 20px padding
+                    Avatar: 64px, gradient, white initials Bold 22px
+                    Name: Bold 18px navy, 8px below avatar
+                    Business: navy 50% 14px, 4px below name
+                    Plan badge: #3B9FE8 text, #E8F4FD bg, 12px radius, 4x10px padding
+                    Edit link: #3B9FE8 13px, 8px below plan badge
+  Settings groups : 20px top margin between sections
+                    Section header: navy 50% 12px uppercase, 12px horizontal padding, 8px below
+                    Group card: white, 16px radius, 0px padding (rows handle it)
+  Setting rows    : 56px tall each, 20px horizontal padding
+                    Left: icon 20px in colored 32px square (8px radius) + title Bold 14px navy
+                    Right: subtitle navy 40% 13px + chevron navy 30% 16px
+                    OR: toggle switch (iOS style, blue when on)
+                    Rows separated by 1px #F8FAFC divider (left-inset 52px to align past icon)
+  Toggle rows     : Right side: iOS-style toggle (blue #3B9FE8 when on, gray #C5D9EA when off)
+  Danger row      : 'Sign Out' — no icon, red text #FF4757, centered, no chevron
+  Connection status: Green dot 8px + 'Connected' green 13px as subtitle
+
+________________________________________________________________________________
+
+
+SCREEN 25 — DAILY BRIEFING PUSH NOTIFICATION (LOCK SCREEN VIEW)
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design a mock iOS lock screen showing a BizPulse push notification. Lock screen
+background: blurred gradient (navy to blue, blurred). Lock screen UI: time '9:00' white
+Bold 52px, date 'Sunday, April 12' white 60% 16px, both centered near top. Below:
+notification card from BizPulse — rounded card white 90% opacity, 20px radius, 16px
+padding, full width minus 30px: App icon (BizPulse logo 24px square), 'BizPulse' Bold
+12px navy, time 'now' navy 40% 12px right. Notification title: '☀️ Good morning, Rahim!'
+Bold 15px navy. Notification body: '৳1,84,320 so far today · 247 orders · 3 alerts
+need attention. Tap to see your briefing.' navy 50% 13px, 2 lines. Below notification:
+small expanded preview section (if notification is expanded): 3 bullet rows showing
+key metrics in compact form, each with a colored dot prefix. Overall feel: premium
+iOS notification, glassmorphism style, readable at a glance."
+
+DESIGN DETAILS:
+  Lock screen     : #0A2540 → #1E6FCC gradient, gaussian blur overlay 20px
+  Time            : '9:00' white Bold 52px, SF Pro Display
+  Date            : 'Sunday, April 12' white 60% 16px, 8px below time
+  Notification    : white 90% opacity, 20px radius, 16px padding
+                    Horizontal margin: 15px each side
+                    Shadow: 0 4px 20px rgba(0,0,0,0.15)
+  App header row  : App icon 24px + 'BizPulse' Bold 12px navy + time right 12px navy 40%
+                    Height: 24px, 8px below header to title
+  Title           : Bold 15px navy, emoji prefix
+  Body            : navy 50% 13px, 1.5 line-height, 2 lines max
+  Expanded rows   : 8px below body if expanded
+                    • green dot + 'Revenue up 18% vs yesterday' 12px navy
+                    • amber dot + '3 alerts need attention' 12px navy
+                    • blue dot + 'Monday forecast: ৳2,10,000' 12px navy
+
+________________________________________________________________________________
+
+
+SCREEN 26 — ONBOARDING TOUR OVERLAY (FIRST LOGIN TOOLTIPS)
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design a first-login tooltip/tour overlay for BizPulse home screen. Show the home
+dashboard screen dimmed (navy 60% overlay) with one element highlighted — the revenue
+hero card is highlighted bright (not dimmed, full opacity). A tooltip callout floats
+below the hero card: white card 20px radius, 240px wide, 16px padding, with an upward
+pointing triangle connector. Tooltip title: 'Your live revenue' Bold 15px navy. Tooltip
+body: 'This updates every 60 seconds with real data from your system.' navy 50% 13px.
+Footer row: 'Skip tour' navy 40% 13px left, '1 of 5' navy 50% 12px center, 'Next →'
+blue Bold 13px right. The rest of the screen remains dimmed. In the bottom right corner:
+a small floating 'Skip tour' button in white 80% opacity, 12px text navy, pill shape."
+
+DESIGN DETAILS:
+  Overlay         : #0A2540 60% opacity, full screen except highlighted element
+  Highlight       : Hero card at full opacity, with white glow ring 4px #3B9FE8
+                    Box-shadow: 0 0 0 4px #3B9FE8, 0 0 30px rgba(59,159,232,0.4)
+  Tooltip         : White, 20px radius, 240px wide, 16px padding
+                    Positioned below highlight with 16px gap
+                    Triangle: 10x8px upward pointing, white, centered on card top edge
+  Tooltip title   : Bold 15px navy
+  Tooltip body    : navy 50% 13px 1.5 line-height, 6px below title
+  Footer          : Flex row space-between, 12px below body
+                    Skip: navy 40% 13px
+                    Counter: '1 of 5' navy 50% 12px centered
+                    Next: #3B9FE8 Bold 13px
+  Corner skip     : White 80% pill, 12px text, 12px horizontal padding, 32px tall
+                    Bottom-right corner, 20px from edges
+
+________________________________________________________________________________
+
+
+SCREEN 27 — EMPTY STATE / NO DATA SCREEN
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design an empty state screen for BizPulse when a module has no data yet (e.g. first
+sync hasn't completed or no orders exist for a period). White background with subtle
+light blue gradient. Center of screen (vertically centered with slight upward offset):
+flat illustration 160px wide of an empty chart/dashboard with a small magnifying glass
+and question mark — in blue and navy tones, friendly style. Below illustration: headline
+'No data yet' Bold 20px navy centered. Below headline: body text 'Your data is still
+syncing, or there are no records for this period. Check back in a few minutes.' navy 50%
+14px centered max 280px line-wrap. Below body: 'Last sync attempt: 3 min ago' navy 30%
+12px centered. Two buttons: 'Refresh Now' gradient blue full width. 'Change Date Range'
+outlined navy full width. 20px gap between. Bottom: 'Need help?' blue link 13px centered."
+
+DESIGN DETAILS:
+  Illustration    : 160x120px, flat style, friendly, navy/blue palette
+                    Chart with no bars + magnifying glass + ?
+  Headline        : Bold 20px navy, 20px below illustration
+  Body            : navy 50% 14px, max 280px, centered, 1.6 line-height
+  Sync time       : navy 30% 12px, 8px below body
+  Buttons         : 20px horizontal margins, 12px gap between
+                    Refresh: gradient #6C63FF → #3B9FE8, 48px, white Bold 14px
+                    Date range: outlined 1.5px navy, 44px, navy 14px
+  Help link       : #3B9FE8 13px, 16px below second button
+
+________________________________________________________________________________
+
+
+SCREEN 28 — ERROR STATE / CONNECTION LOST SCREEN
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design an error/offline state screen for BizPulse. White background. Center: flat
+illustration of a broken chain link or disconnected plug in red and navy tones, 140px.
+Below illustration: 'Connection lost' Bold 20px navy. Below: 'Unable to reach your
+database. Your last synced data is still available.' navy 50% 14px centered max 280px.
+Below that: a white card with 12px radius showing cached data status: '৳1,84,320 —
+Last synced data' with clock icon + 'Synced 14 min ago' navy 40% 12px. Amber banner
+at top of screen (below nav): 'Showing cached data — live updates paused' amber bg
+(#FFF8E0), amber text (#FFB020) Bold 13px, warning icon left. Full-width button
+'Retry Connection' in gradient blue. 'Work offline' link below."
+
+DESIGN DETAILS:
+  Amber banner    : Full width, 40px tall, attached below nav bar
+                    #FFF8E0 bg, #FFB020 text, warning icon 16px left + 8px gap
+                    'Showing cached data — live updates paused' Bold 13px
+  Illustration    : Centered, 140px wide, flat broken connection metaphor
+  Headline        : Bold 20px navy, 20px below illustration
+  Body            : navy 50% 14px max 280px centered
+  Cache card      : White, 12px radius, 12px padding, 16px below body
+                    Clock icon 16px navy 50% + revenue figure + sync time
+  Retry button    : Gradient blue, full width -40px, 48px, 16px radius
+  Offline link    : '#3B9FE8' 13px, centered, 12px below button
+
+________________________________________________________________________________
+
+
+SCREEN 29 — REPORT VIEWER (PDF MONTHLY DIGEST)
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design a report viewer screen for BizPulse showing a monthly financial digest.
+White background. Nav bar: back arrow, 'March 2026 Report' Bold 18px, share icon
+right (upload/share icon). Below nav: report cover header — full width card
+gradient navy-to-blue, 24px radius, 24px padding: 'BIZPULSE MONTHLY REPORT'
+white 40% 12px uppercase, 'March 2026' white Bold 28px, 'eMartway Skincare
+Limited' white 60% 14px, generated date 'Generated Apr 1, 2026' white 40% 12px.
+Below cover: report section cards stacked. Section 1 'EXECUTIVE SUMMARY' — white
+card, left blue accent bar 4px, key highlights in bullet rows (green/red arrows
++ text). Section 2 'REVENUE' — white card with mini line chart + key figure.
+Section 3 'TOP PRODUCTS' — horizontal list with small bars. Section 4 'CUSTOMER
+HEALTH' — RFM segment summary. Section 5 'TEAM' — top performer callout.
+Bottom fixed bar: 'Download PDF' gradient button left, 'Share' outlined button right."
+
+DESIGN DETAILS:
+  Report cover    : #0A2540 → #1E6FCC gradient card, full width -40px, 24px radius
+                    Report type: white 40% 12px uppercase
+                    Month: white Bold 28px, 4px below type
+                    Business: white 60% 14px, 4px below month
+                    Date: white 40% 12px, 4px below business
+  Section cards   : White, 16px radius, 16px padding, 12px gap
+                    Header: section title Bold 15px navy + 4px blue left bar
+  Bullet rows     : ▲ green or ▼ red arrow 12px + text navy 13px, 8px between
+  Mini charts     : 100px wide 48px tall, inside section cards, simplified
+  Bottom action bar: White bg, 0.5px top border, 16px padding, 72px tall
+                    Download: gradient blue, left half width
+                    Share: outlined navy, right half width
+                    12px gap between
+
+________________________________________________________________________________
+
+
+SCREEN 30 — SEARCH SCREEN
+================================================================================
+
+PROMPT BLOCK FOR STITCH AI:
+"Design a global search screen for BizPulse. White background. Top: large search
+input bar full width, 20px margins — white bg, 12px radius, 1px blue border,
+44px tall, magnifying glass icon left 16px navy 40%, text input 'Search products,
+customers, reports...' placeholder navy 30% 15px, X clear button right when active.
+Auto-focus on entry. Below search bar: 'RECENT SEARCHES' section header navy 50%
+11px uppercase. 4 recent search chips in 2 rows: each white card 32px tall, 12px
+radius, 12px horizontal padding, clock icon 12px navy 30% left, text navy 13px.
+Below recent: 'QUICK ACTIONS' section — 2x2 grid of action cards: 'Ask AI anything'
+(gradient purple-blue), 'View today's sales' (blue), 'Check churn risks' (red tint),
+'Inventory alerts' (amber tint) — each 72px tall, icon 24px, title Bold 13px navy.
+When typing: show live results below search bar grouped by type: Products (with image
+placeholder + name + SKU), Customers (with avatar + name + status), Reports (with
+document icon + title + date). Results have thin dividers, 56px rows."
+
+DESIGN DETAILS:
+  Search bar      : White bg, 1.5px #3B9FE8 border when focused, 12px radius, 44px
+                    Magnifying glass: navy 40% 16px, left 12px
+                    Placeholder: navy 30% 15px
+                    Clear X: navy 40% 16px, right 12px, appears when text > 0
+  Recent chips    : White bg, 1px #E8F0F8 border, 32px tall, 12px horizontal padding
+                    Clock icon #C5D9EA 12px + text navy 13px
+                    8px gap between chips
+  Quick action grid: 2x2, 12px gap, 20px horizontal padding
+                    Each card: 72px tall, 12px radius, 12px padding
+                    AI card: gradient #6C63FF → #3B9FE8, white icon and text
+                    Sales card: #E8F4FD bg, blue icon, navy text
+                    Churn card: #FFF0F0 bg, red icon, navy text
+                    Inventory card: #FFF8E0 bg, amber icon, navy text
+  Live results    : Appear below search bar, replacing recent/quick actions
+                    Group header: 'PRODUCTS', 'CUSTOMERS' etc — navy 40% 11px uppercase
+                    Result rows: 56px, image/avatar left 40px + text block + chevron right
+
+________________________________________________________________________________
+
+
+APPENDIX A — COMPONENT LIBRARY REFERENCE
+================================================================================
+
+COLORS (hex values for all states)
+
+  Primary blue      : #3B9FE8
+  AI purple         : #6C63FF
+  Deep navy         : #0A2540
+  Mid navy          : #1A3A5C
+  Light blue bg     : #E8F4FD
+  Card border       : #DCE8F5
+  Success green     : #00C896
+  Warning amber     : #FFB020
+  Danger red        : #FF4757
+  Text primary      : #0A2540
+  Text secondary    : rgba(10,37,64,0.5)
+  Text tertiary     : rgba(10,37,64,0.3)
+  White             : #FFFFFF
+  Off-white         : #F8FBFF
+
+GRADIENTS
+
+  AI gradient       : #6C63FF (left) → #3B9FE8 (right) or (top → bottom)
+  Hero card         : #0A2540 → #1E6FCC (left → right)
+  Background page   : #E8F4FD → #C2E0F8 (top → bottom)
+  Success action    : #00C896 → #3B9FE8
+  Rank 1 (gold)     : #FFD700 → #FFA500
+  Rank 2 (silver)   : #C0C0C0 → #A0A0A0
+  Rank 3 (bronze)   : #CD7F32 → #8B4513
+
+SPACING SYSTEM (base 4px)
+
+  4px   : Icon-to-text minimum gap
+  8px   : Tight element gap, icon margins
+  12px  : Card internal padding (compact)
+  16px  : Card internal padding (standard), section element gap
+  20px  : Screen horizontal padding, card padding (large)
+  24px  : Section vertical gap
+  32px  : Major section separator
+  40px  : Large feature separation
+
+TYPOGRAPHY SCALE
+
+  10px  : Micro labels, timestamps, chart axis
+  11px  : Section headers (uppercase + tracking)
+  12px  : Secondary metadata, captions
+  13px  : Action links, chip text, secondary body
+  14px  : Primary body, card content
+  15px  : Chat messages, prominent body
+  16px  : Input text, emphasized body
+  18px  : Screen titles, subheadlines
+  20px  : Card values (medium)
+  22px  : Profile names, large card values
+  24px  : Metric values (standard)
+  28px  : Hero metric values
+  32px  : Major metric values
+  36px  : Revenue hero number
+
+COMPONENT STATES
+
+  Default   : As specified per component
+  Hover     : 5% navy overlay on interactive elements
+  Pressed   : 10% navy overlay + scale(0.97)
+  Focused   : 2px #3B9FE8 border or outline
+  Disabled  : 40% opacity, no pointer events
+  Loading   : Shimmer animation (light gray → lighter gray → light gray)
+  Error     : Red border #FF4757, red helper text below
+
+ELEVATION / SHADOW SYSTEM
+
+  Level 0 : No shadow (flat surface)
+  Level 1 : 0 2px 8px rgba(10,37,64,0.06) — cards on white bg
+  Level 2 : 0 4px 20px rgba(10,37,64,0.08) — floating cards
+  Level 3 : 0 8px 40px rgba(10,37,64,0.16) — modals, bottom sheets
+  Level 4 : 0 16px 60px rgba(10,37,64,0.24) — urgent overlays
+
+BOTTOM NAVIGATION BAR
+
+  Height        : 72px total (including safe area padding)
+  Background    : White (#FFFFFF)
+  Top border    : 0.5px #E0EAF5
+  Icons         : 24px, 5 items evenly spaced
+  Labels        : 10px, 4px below icon
+  Active item   : #3B9FE8 icon fill, #3B9FE8 label Bold
+                  32x4px pill bg in #E8F4FD at center of icon area
+  Inactive item : rgba(10,37,64,0.4) icon, same color label Regular
+  Tab items     : Home, Sales, Inventory, Customers, More
+  More tab      : Opens bottom sheet with remaining modules
+
+________________________________________________________________________________
+
+
+APPENDIX B — SCREEN INVENTORY SUMMARY
+================================================================================
+
+  01  Splash Screen
+  02  Onboarding 1 — Welcome
+  03  Onboarding 2 — AI Co-Pilot Intro
+  04  Onboarding 3 — Zero Disruption Promise
+  05  Connect Your Business (Setup)
+  06  Schema Discovery / Sync Progress
+  07  Biometric Login
+  08  PIN Entry
+  09  Home Dashboard ← PRIMARY SCREEN
+  10  Morning Briefing Card (Expanded)
+  11  Sales & Revenue Module
+  12  Revenue Anomaly Alert Modal
+  13  Inventory Intelligence
+  14  Product Detail Drill-Down
+  15  Customer Intelligence
+  16  Customer Detail Screen
+  17  Win-Back Message Composer
+  18  Financial Intelligence
+  19  Cash Flow Projection
+  20  Team Performance
+  21  AI Co-Pilot Chat Interface ← KEY DIFFERENTIATOR
+  22  AI Query Result (Full Screen)
+  23  Notifications Center
+  24  Settings
+  25  Push Notification (Lock Screen View)
+  26  Onboarding Tour Overlay
+  27  Empty State
+  28  Error / Connection Lost State
+  29  Report Viewer
+  30  Search Screen
+
+  Total screens: 30
+  Core user journey: 07 → 09 → 21 → 11/13/15/18/20
+  First-time journey: 01 → 02 → 03 → 04 → 05 → 06 → 07 → 09
+
+________________________________________________________________________________
+
+
+APPENDIX C — STITCH AI PROMPT TIPS
+================================================================================
+
+RECOMMENDED PROMPT STRUCTURE FOR EACH SCREEN:
+
+  [GLOBAL STYLE HEADER — paste from page 1 every time]
+  +
+  [SCREEN-SPECIFIC PROMPT BLOCK from this guide]
+  +
+  [OPTIONAL MODIFIER — e.g. "Show the dark mode version" or
+   "Show the screen in Bangla language" or
+   "Show this screen on an iPhone 15 Pro frame" or
+   "Show the loading/skeleton state of this screen"]
+
+EFFECTIVE MODIFIERS TO ADD:
+
+  For dark mode     : "Also show a dark mode variant where backgrounds use
+                       #0A2540 and cards use #1A3A5C with white text."
+
+  For Bangla locale : "Render all UI text in Bangla script. Numbers should
+                       use Bengali numerals where appropriate."
+
+  For framing       : "Show this on an iPhone 15 Pro device frame with
+                       the Dynamic Island visible at top."
+
+  For interaction   : "Show the pressed/active state of the primary CTA button."
+
+  For annotations   : "Add numbered annotation callouts (1-8) pointing to
+                       key UI elements for developer handoff."
+
+PRIORITY BUILD ORDER (screens to generate first for demo):
+
+  Priority 1 : Screen 09 (Home Dashboard) — the pitch screen
+  Priority 2 : Screen 21 (AI Co-Pilot Chat) — the wow factor
+  Priority 3 : Screen 11 (Sales Module) — the first module
+  Priority 4 : Screen 07 (Biometric Login) — the first impression
+  Priority 5 : Screen 15 (Customer Intelligence) — the churn story
+
+________________________________________________________________________________
+
+END OF UI GUIDE
+
+BizPulse — Your business, always awake.
+UI Guide v1.0 — April 13, 2026
+
+________________________________________________________________________________

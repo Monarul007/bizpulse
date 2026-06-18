@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Env files
+.env
+.env.*
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+.vscode/settings.json
+.fleet/
+.zed/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Planning (if commit_docs is toggled off)
+# .planning/

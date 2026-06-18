@@ -1,0 +1,3 @@
+packages:
+  - 'bizpulse-api'
+  - 'bizpulse-mobile'

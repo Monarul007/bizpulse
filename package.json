@@ -1,0 +1,13 @@
+{
+  "name": "bizpulse",
+  "private": true,
+  "scripts": {
+    "dev:api": "pnpm --filter bizpulse-api dev",
+    "dev:mobile": "pnpm --filter bizpulse-mobile start",
+    "dev": "pnpm run --parallel dev:api dev:mobile",
+    "build:api": "pnpm --filter bizpulse-api build",
+    "lint:api": "pnpm --filter bizpulse-api lint",
+    "lint": "pnpm --filter bizpulse-api lint",
+    "format": "pnpm --filter bizpulse-api format"
+  }
+}
