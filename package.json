@@ -7,7 +7,37 @@
     "dev": "pnpm run --parallel dev:api dev:mobile",
     "build:api": "pnpm --filter bizpulse-api build",
     "lint:api": "pnpm --filter bizpulse-api lint",
-    "lint": "pnpm --filter bizpulse-api lint",
-    "format": "pnpm --filter bizpulse-api format"
+    "lint:mobile": "pnpm --filter bizpulse-mobile lint",
+    "lint": "pnpm run lint:api && pnpm run lint:mobile",
+    "lint:check": "pnpm --filter bizpulse-api lint:check",
+    "format:api": "pnpm --filter bizpulse-api format",
+    "format": "pnpm run format:api",
+    "format:check": "pnpm --filter bizpulse-api format:check",
+    "types:check": "pnpm --filter bizpulse-api types:check",
+    "test:api": "pnpm --filter bizpulse-api test",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "setup": "pnpm install && pnpm --filter bizpulse-api composer install && pnpm db:up",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2"
+  },
+  "lint-staged": {
+    "bizpulse-api/resources/js/**/*.{ts,tsx}": [
+      "pnpm --filter bizpulse-api eslint --fix",
+      "pnpm --filter bizpulse-api prettier --write"
+    ],
+    "bizpulse-api/resources/css/**/*.css": [
+      "pnpm --filter bizpulse-api prettier --write"
+    ],
+    "bizpulse-api/app/**/*.php": [
+      "./bizpulse-api/vendor/bin/pint"
+    ],
+    "bizpulse-mobile/src/**/*.{ts,tsx}": [
+      "pnpm --filter bizpulse-mobile eslint --fix",
+      "pnpm --filter bizpulse-mobile prettier --write"
+    ]
   }
 }

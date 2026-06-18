@@ -1,0 +1,83 @@
+name: API Tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'bizpulse-api/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'bizpulse-api/**'
+
+jobs:
+  test:
+    name: PHP Tests (Pest)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: bizpulse-api
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: bizpulse_test
+          POSTGRES_USER: bizpulse
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pgsql, pdo_pgsql
+          tools: composer
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Install JS dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Prepare environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Run migrations
+        run: php artisan migrate --force
+        env:
+          DB_CONNECTION: pgsql
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_DATABASE: bizpulse_test
+          DB_USERNAME: bizpulse
+          DB_PASSWORD: password
+
+      - name: Run tests
+        run: php artisan test --parallel
+        env:
+          DB_CONNECTION: pgsql
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_DATABASE: bizpulse_test
+          DB_USERNAME: bizpulse
+          DB_PASSWORD: password

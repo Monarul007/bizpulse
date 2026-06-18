@@ -1,0 +1,74 @@
+name: Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  api-lint:
+    name: API — Lint & Format Check
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: bizpulse-api
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install JS dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: ESLint check
+        run: pnpm run lint:check
+
+      - name: Prettier check
+        run: pnpm run format:check
+
+      - name: PHP CS check (Pint)
+        run: ./vendor/bin/pint --test
+
+      - name: PHPStan / Types check
+        run: pnpm run types:check
+
+  mobile-lint:
+    name: Mobile — Lint & Format Check
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: bizpulse-mobile
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: TypeScript check
+        run: npx tsc --noEmit
